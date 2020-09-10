@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="theme-color" content="#212121">
+    <meta name="robots" content="index, nofollow">
+    <meta name="googlebot" content="index, nofollow">
+    <meta name="google" content="nositelinkssearchbox">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="geo.region" content="DE">
+    <title>Trinkspiel</title>
+    <link rel="stylesheet" href="css/style.css?0">
+    <link rel="icon" type="image/png" href="img/beer.svg">
+</head>
+<body>
+    <div id="app">
+        <div id="portrait">
+            <h1>{{ text.title }}</h1>
+            <div id="addPlayersListOuter">
+                <div id="addPlayersList">
+                    <div
+                        v-for="(player, index) in playerList"
+                        :key="(index+1)">
+                        <input
+                            :placeholder="text.player + ' ' + (index+1)"
+                            v-model.lazy="playerList[index].name"
+                            type="text"
+                            class="addPlayersListItem"
+                            @keydown.enter="nextPlayersListItem">
+                            <img @click="deletePlayerListItem(index)" src="img/plus.svg" alt="x" class="removePlayersListButton">
+                    </div>
+                </div>
+                <img @click="addPlayerListItem" src="img/plus.svg" alt="+" class="addPlayersListButton">
+            </div>
+            <div id="manual">
+                {{ text.manual }}
+            </div>
+            <footer>
+                <a class="text-muted" href="/privacyPolicy.html">Datenschutzerklärung</a> |
+                <a class="text-muted" href="/imprint.html">Impressum</a><br>
+                <div>© Oliver Großkloß</div>
+            </footer>
+    
+            <div class="overlayWarningOuter" id="alcoholWarningOuter" v-if="show.alcoholWarningOuter">
+                <div class="overlayWarning">
+                    {{ text.alcoholWarning }}<br>
+                    <div @click="exitGame" class="alcoholWarningButton" id="alcoholWarningBack">{{ text.back }}</div>
+                    <div @click="startGame" class="alcoholWarningButton" id="alcoholWarningOK">{{ text.ok }}</div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="landscape">
+            <div id="gameBoardOuter">
+                <div id="gameBoard">
+                    <game-field
+                        v-for="i in 10"
+                        :key="i"
+                        :number="i"
+                        :id="'gameField'+i">
+                    </game-field>
+                </div>
+            </div>
+            <div class="overlayWarningOuter" id="turnWarningOuter" v-if="show.turnWarningOuter">
+                <div class="overlayWarning">{{ text.overlayWarning}}</div>
+            </div>
+        </div>
+    </div>
+    <script src="js/vue.js?0"></script>
+    <script src="js/script.js?0"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+</body>
+</html>
