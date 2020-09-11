@@ -54,6 +54,9 @@ a {
         overflow-x: hidden;
         overflow-y: scroll;
     }
+    #addPlayersList::-webkit-scrollbar {
+        display: none;
+    }
     .addPlayersListItem{
         width: calc(100% - 4px);
         height: 2em;
@@ -123,6 +126,7 @@ a {
         width: 100vw;
         overflow-x: scroll;
         overflow-y: hidden;
+        background-color: #444;
     }
     #gameBoardOuter::-webkit-scrollbar {
         display: none;
@@ -131,12 +135,25 @@ a {
         width: max-content;
         /* overflow-x: scroll; */
         /* overflow-y: hidden; */
+        padding-right: 1vh;
     }
     .gameField{
         display: inline-block;
-        width: 25vh;
-        height: 25vh;
-        background-color: #4b3737;
-        margin: 1vh;
+        width: 23vh;
+        height: 23vh;
+        background-color: #222;
+        margin: 1vh 0vh 1vh 1vh;
+        padding: 1vh;
+    }
+    .playerContainer {
+        margin: 20vh 0 0 2.5vh;
+    }
+    .player {
+        width: 15vh;
+        height: 15vh;
+        border-radius: 50%;
+        border: 1.5vh solid #0004;
+        background-color: #560d00;
+        margin-top: -20vh;
     }
 }

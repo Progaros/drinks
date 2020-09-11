@@ -50,15 +50,16 @@
                 </div>
             </div>
         </div>
-        
+
         <div id="landscape">
             <div id="gameBoardOuter">
                 <div id="gameBoard">
                     <game-field
-                        v-for="i in 10"
-                        :key="i"
-                        :number="i"
-                        :id="'gameField'+i">
+                        v-for="i in 100 +1"
+                        :key="i-1"
+                        :number="i-1"
+                        :players-array="players"
+                        :id="'gameField'+(i-1)">
                     </game-field>
                 </div>
             </div>

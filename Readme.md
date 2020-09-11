@@ -6,6 +6,7 @@
 - save game in cookies
 - loading screen?
 - if on desktop show qrcode for phone
+- write deploy script?
 
 
 # Notes

@@ -1,6 +1,26 @@
-Vue.component("game-field", {
-    props: ['number'],
-    template: "<div class='gameField'>{{ number }}</div>"
+var gameField = Vue.component("game-field", {
+    props: ["number", "players-array"],
+    computed: {
+        content: function () {
+            return this.number==0 ? "Start" : this.number;
+        },
+        players: function () {
+            return this.playersArray.filter(
+                function filterPosition(element) {
+                    return element.position == this;}, 
+                this.number);
+        }
+    },
+    template: `<div class="gameField">
+                    {{ content }}
+                    <div class="playerContainer">
+                        <div
+                            v-for="(player, index) in players"
+                            :key="index"
+                            class="player">
+                        </div>
+                    </div>
+                </div>`
 });
 
 var app = new Vue({
@@ -23,7 +43,7 @@ var app = new Vue({
             overlayWarning: "Bitte drehe das Gerät hochkant, um das Spiel zu starten.",
             continueGame: "Weiterspielen?"
         },
-        playerList: []
+        playerList: [{name:"tset",position:0}]
     },
     methods: {
         addPlayerListItem: function() {
@@ -56,9 +76,9 @@ var app = new Vue({
     computed: {
         players: function() {
             var players = this.playerList.filter(x => x.name != undefined);
-            if (players.length == 0)
-                return [{ name: "Bitte füge Spieler hinzu" }]; //default message
-            else
+            // if (players.length == 0)
+            //     return [{ name: "Bitte füge Spieler hinzu" }]; //default message
+            // else
                 return players;
         }
     }
