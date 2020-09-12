@@ -7,6 +7,9 @@
 - loading screen?
 - if on desktop show qrcode for phone
 - write deploy script?
+- cocktail glass as icon
+- newest player on top
+- player colors
 
 
 # Notes
@@ -17,3 +20,11 @@
 - deletePlayerListItemButton neccesary?
 - alcohol warning text
 - manual text (+icons?)
+
+
+app.players[0].position += Math.ceil(Math.random()*6);
+document.getElementById("gameField"+app.players[0].position).scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+            inline: 'center'
+        });

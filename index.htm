@@ -31,7 +31,7 @@
                             <img @click="deletePlayerListItem(index)" src="img/plus.svg" alt="x" class="removePlayersListButton">
                     </div>
                 </div>
-                <img @click="addPlayerListItem" src="img/plus.svg" alt="+" class="addPlayersListButton">
+                <img @click="addPlayerListItem()" src="img/plus.svg" alt="+" class="addPlayersListButton">
             </div>
             <div id="manual">
                 {{ text.manual }}
@@ -61,6 +61,16 @@
                         :players-array="players"
                         :id="'gameField'+(i-1)">
                     </game-field>
+                </div>
+
+            </div>
+            <div id="gameContent">
+                <div id="gameTextOuter">
+                    <div id="playerName">Spieler</div>
+                    <div id="gameText">Stuff do do. drink lots of stuff</div>
+                </div>
+                <div id="gameButtons">
+                    <div class="gameButton" @click="rollDice">Roll Dice</div>
                 </div>
             </div>
             <div class="overlayWarningOuter" id="turnWarningOuter" v-if="show.turnWarningOuter">

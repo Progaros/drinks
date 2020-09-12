@@ -46,8 +46,12 @@ a {
     #landscape {display: none;}
     #addPlayersListOuter {
         width: 50%;
+        min-height: 40vh;
         max-height: 50vh;
         margin: 0 25%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
     #addPlayersList {
         max-height: calc(50vh - 2.3em);
@@ -87,7 +91,7 @@ a {
     }
     #manual{
         width: 60%;
-        margin: 8vh auto 3em auto;
+        margin: 1vh auto 3em auto;
         white-space: pre-line;
     }
     footer{
@@ -126,16 +130,14 @@ a {
         width: 100vw;
         overflow-x: scroll;
         overflow-y: hidden;
-        background-color: #444;
     }
     #gameBoardOuter::-webkit-scrollbar {
         display: none;
     }
     #gameBoard{
         width: max-content;
-        /* overflow-x: scroll; */
-        /* overflow-y: hidden; */
         padding-right: 1vh;
+        /* background-color: #444; */
     }
     .gameField{
         display: inline-block;
@@ -144,9 +146,18 @@ a {
         background-color: #222;
         margin: 1vh 0vh 1vh 1vh;
         padding: 1vh;
+        border: 1vh solid #444;
+        border-radius: 3vh;
+    }
+    .gameFieldText{
+        height: 0;
+        position: relative;
+        top: 8vh;
+        text-align: center;
+        font-size: 6vh;
     }
     .playerContainer {
-        margin: 20vh 0 0 2.5vh;
+        margin: 22.5vh 0 0 2.5vh;
     }
     .player {
         width: 15vh;
@@ -155,5 +166,40 @@ a {
         border: 1.5vh solid #0004;
         background-color: #560d00;
         margin-top: -20vh;
+        position: relative;
+    }
+    #gameContent{
+        height: calc(100vh - 27vh);
+        display: flex;
+    }
+    #gameTextOuter{
+        height: calc(100vh - 29vh);
+        flex-grow: 3;
+        display: inline-block;
+    }
+    #playerName{
+        font-size: 10vh;
+        margin: 4vh;
+    }
+    #gameText{
+        font-size: 5vh;
+        margin: 4vh;
+    } 
+    #gameButtons{
+        display: inline-block;
+        height: calc(100vh - 29vh);
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .gameButton{
+        margin: 4vh;
+        background-color: #131313;
+        padding: 4vh;
+        font-size: 4vh;
+        border-radius: 3vh;
+        border: 1vh solid #444;
+        text-align: center;
     }
 }

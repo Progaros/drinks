@@ -12,7 +12,7 @@ var gameField = Vue.component("game-field", {
         }
     },
     template: `<div class="gameField">
-                    {{ content }}
+                    <div class="gameFieldText">{{ content }}</div>
                     <div class="playerContainer">
                         <div
                             v-for="(player, index) in players"
@@ -48,6 +48,13 @@ var app = new Vue({
     methods: {
         addPlayerListItem: function() {
             app.playerList.push(new Player);
+            setTimeout(()=>{//wait until input is created
+                document.getElementById("addPlayersList").lastElementChild
+                    .scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'end',
+                    });
+            },20);
         },
         deletePlayerListItem: function(index) {
             this.playerList.splice(index, 1);
@@ -57,7 +64,7 @@ var app = new Vue({
                 app.addPlayerListItem();
                 setTimeout(()=>{//wait until input is created
                     document.activeElement.parentElement.nextElementSibling.firstElementChild.focus();
-                },50);
+                },100);
         },
         startGame: function() {
             app.show.alcoholWarningOuter = false;
@@ -71,6 +78,16 @@ var app = new Vue({
             var element = document.body;
             var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
             requestMethod.call(element);
+        },
+        rollDice: function() {
+            this.players[0].position += Math.ceil(Math.random()*6);
+            if (this.players[0].position > 100)
+                this.players[0].position = 100;
+            document.getElementById("gameField"+this.players[0].position).scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center',
+                        inline: 'center'
+                    });
         }
     },
     computed: {
