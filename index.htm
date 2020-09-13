@@ -10,7 +10,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="geo.region" content="DE">
     <title>Trinkspiel</title>
-    <link rel="stylesheet" href="css/style.css?0">
+    <link rel="stylesheet" href="css/style.css?1">
     <link rel="icon" type="image/png" href="img/beer.svg">
 </head>
 <body>
@@ -50,7 +50,7 @@
             </div>
         </div>
 
-        <div id="landscape">
+        <div id="landscape" :style="'border-color:'+currentPlayerColor">
             <div id="gameProgress">
                 <div
                     v-for="(player, index) in players"
@@ -95,7 +95,7 @@
         </div>
     </div>
     <script src="js/vue.js?0"></script>
-    <script src="js/script.js?0"></script>
+    <script src="js/script.js?5"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
 </body>
 </html>
