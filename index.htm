@@ -19,19 +19,18 @@
             <h1>{{ text.title }}</h1>
             <div id="addPlayersListOuter">
                 <div id="addPlayersList">
-                    <div
+                    <add-players-list-item
                         v-for="(player, index) in playerList"
-                        :key="(index+1)">
-                        <input
-                            :placeholder="text.player + ' ' + (index+1)"
-                            v-model.lazy="playerList[index].name"
-                            type="text"
-                            class="addPlayersListItem"
-                            @keydown.enter="nextPlayersListItem">
-                            <img @click="deletePlayerListItem(index)" src="img/plus.svg" alt="x" class="removePlayersListButton">
-                    </div>
+                        :key="(index+1)"
+                        :player-text="text.player"
+                        :player-list="playerList"
+                        :player="player"
+                        :index="index"
+                        v-on:delete-players-list-item="deletePlayersListItem"
+                        v-on:next-players-list-item="nextPlayersListItem">
+                    </add-players-list-item>
                 </div>
-                <img @click="addPlayerListItem()" src="img/plus.svg" alt="+" class="addPlayersListButton">
+                <img @click="addPlayersListItem()" src="img/plus.svg" alt="+" class="addPlayersListButton">
             </div>
             <div id="manual">
                 {{ text.manual }}
@@ -52,6 +51,16 @@
         </div>
 
         <div id="landscape">
+            <div id="gameProgress">
+                <div
+                    v-for="(player, index) in players"
+                    :key="index"
+                    :style="
+                        'background-color:'+players[index].color + ';' +
+                        'left: calc(' + players[index].position + 'vw * 0.94 + 2vw);'"
+                    class="playerMini">
+                </div>
+            </div>
             <div id="gameBoardOuter">
                 <div id="gameBoard">
                     <game-field
@@ -66,11 +75,18 @@
             </div>
             <div id="gameContent">
                 <div id="gameTextOuter">
-                    <div id="playerName">Spieler</div>
-                    <div id="gameText">Stuff do do. drink lots of stuff</div>
+                    <div 
+                        id="playerName"
+                    :style="'color:' + currentPlayerColor">
+                        {{ currentPlayerName }}
+                    </div>
+                    <div id="gameText">Stuff do do. Do lots of stuff</div>
                 </div>
                 <div id="gameButtons">
-                    <div class="gameButton" @click="rollDice">Roll Dice</div>
+                    <game-button
+                        v-on:button-action="rollDice"
+                        :text="text">
+                    </game-button>
                 </div>
             </div>
             <div class="overlayWarningOuter" id="turnWarningOuter" v-if="show.turnWarningOuter">

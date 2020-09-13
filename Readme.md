@@ -9,7 +9,8 @@
 - write deploy script?
 - cocktail glass as icon
 - newest player on top
-- player colors
+- fit text always in task box
+- save on Zug beenden
 
 
 # Notes
