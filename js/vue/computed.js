@@ -18,5 +18,8 @@ var computed = {
             app.game.text = "Drücke auf Würfeln";
         }
         return players;
+    },
+    fields: function() {
+        return game.field;
     }
 }

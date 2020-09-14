@@ -21,8 +21,8 @@ var methods = {
             },100);
     },
     startGame: function() {
-        this.show.alcoholWarningOuter = false;
-        this.show.turnWarningOuter = false;
+        this.show.alcoholWarning = false;
+        this.show.turnWarning = false;
         this.requestFullscreen();
     },
     exitGame: function() {
@@ -30,6 +30,42 @@ var methods = {
     },
     saveGame: function(){
         localStorage.setItem('playerList', JSON.stringify(this.playerList));
+        localStorage.setItem('lastTime', JSON.stringify(Date.now()));
+    },
+    resetSave: function(){
+        var resetedPlayers = JSON.parse(JSON.stringify(app.players));
+        resetedPlayers.forEach(p => {p.position=0; p.luck=1});
+        localStorage.setItem('playerList', JSON.stringify(resetedPlayers));
+    },
+    resetGame: function(){
+        confetti.stop();
+        app.players.push(
+            app.players.splice(0,1)[0] //next player
+        );
+        app.players.forEach(p => {p.position=0; p.luck=1});
+        app.game.buttons = [{action: game.rollDice, text: app.text.rollDice}];
+        app.game.text = "Drücke auf Würfeln";
+        document.getElementById("gameField0")
+            .scrollIntoView({
+                behavior: 'smooth',
+                block: 'end',
+        });
+    },
+    notRestoreGame: function() {
+        this.show.restoreProgress = false;
+        localStorage.removeItem('playerList');
+    },
+    restoreGame: function() {
+        this.show.restoreProgress = false;
+        if (localStorage.getItem("playerList")) {
+            try {
+                this.playerList = JSON.parse(localStorage.getItem('playerList'));
+            } catch(e) {
+                alert("an error occured");
+                console.error(e);
+                localStorage.removeItem('playerList');
+            }
+        }
     },
     requestFullscreen: function() {
         var element = document.body;

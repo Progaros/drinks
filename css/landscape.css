@@ -5,6 +5,7 @@
         border: 1.5vh solid;
         border-radius: 5vw;
         width: calc(99vw - 6px);
+        background-color: #222;
     }
     #gameBoardOuter{
         width: calc(99vw - 6px);
@@ -61,10 +62,10 @@
         position: relative;
     }
     #gameContent{
-        display: flex;
     }
     #gameTextOuter{
         height: 56vh;
+        width: 66vw;
         flex-grow: 3;
         display: inline-block;
     }
@@ -93,17 +94,18 @@
         background-color: #222;
         left: -5vw;
         padding: 4vh 5vw 2vh 8vw;
+        white-space: pre-line;
     } 
     #gameButtons{
         height: 56vh;
-        width: 25%;
+        width: 30vw;
         flex-grow: 1;
-        display: flex;
+        display: inline-block;
         flex-direction: column;
         justify-content: center;
     }
     .gameButton{
-        margin: 4vh;
+        margin: 3vh 0;
         background-color: #131313;
         padding: 4vh;
         font-size: 4vh;
@@ -111,5 +113,7 @@
         border: 1vh solid #444;
         text-align: center;
         white-space: pre-line;
+        width: -moz-available;
+        width: -webkit-fill-available;
     }
 }

@@ -9,10 +9,13 @@ var text = {
                     "Und so weiter...",
     back: "Zurück",
     ok: "OK",
+    yes: "Ja",
+    no: "Nein",
     overlayWarning: "Bitte drehe das Gerät hochkant, um das Spiel zu starten.",
     continueGame: "Weiterspielen?",
     rollDice: "Würfeln",
     pressRollDice: "Drücke auf Würfeln",
     nextPlayer: "Zug beenden",
-    pleaseAddPlayers: "Bitte mindestens\n2 Spieler hinzufügen"
+    pleaseAddPlayers: "Bitte mindestens\n2 Spieler hinzufügen",
+    restoreProgress: "Speicherstand gefunden. Möchtest du das alte Spiel laden?"
 }

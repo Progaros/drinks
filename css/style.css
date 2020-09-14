@@ -7,7 +7,7 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    background-color: #222;
+    background-color: black;
     color: #ccc;
     font-family: sans-serif;
     -webkit-user-select: none;
@@ -31,6 +31,7 @@ a {
     width: 100%;
     height: 100vh;
     background-color: #181818;
+    z-index: 1;
 }
 .overlayWarning{
     position: absolute;
@@ -39,6 +40,16 @@ a {
     width: calc(60% - 4em);
     overflow: auto;
     padding: 2em;
-    background-color: #212121;
+    background-color: #444;
     line-height: 1.3em;
+}
+.warningButton {
+    margin: 1em;
+    display: inline-block;
+}
+.warningNo{
+    color: #daa;
+}
+.warningYes{
+    color: #ada;
 }

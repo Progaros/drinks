@@ -1,8 +1,17 @@
 class Player {
-    constructor() {
-        this.name;
-        this.position = 0;
+    constructor(name) {
+        this.name = name;
         this.color;
+        this.position = 0;
+        this.luck = 1;
+    }
+    changeLuck(change) {
+        this.luck += change;
+        if (this.luck < 0.5)
+            this.luck = 0.5;
+        else if(this.luck > 2)
+            this.luck = 2;
+        this.luck = Math.round((this.luck)*10)/10;
     }
 };
 
@@ -10,7 +19,7 @@ class Player {
 document.title = app.text.title;
 if (app.playerList.length == 0)
     for(let i=0;i<3;i++) //add players to addPlayerList
-        app.playerList.push({name: "Spieler "+(i+1), position: 0});//new Player
+        app.playerList.push(new Player("Spieler "+(i+1)));//new Player
 
 //preload images
 var dice = []
@@ -30,8 +39,8 @@ if (document.addEventListener){ // TODO: if webapp ignore and go (stay?) fullscr
 }function exitHandler(){
     if (!document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement){
         app.text.alcoholWarning = app.text.continueGame;
-        app.show.alcoholWarningOuter = true;
+        app.show.alcoholWarning = true;
     }
 }
         
-app.show.alcoholWarningOuter = false; app.show.turnWarningOuter = false;  //enable for debugging
+//app.show.alcoholWarning = false; app.show.turnWarning = false;  //enable for debugging

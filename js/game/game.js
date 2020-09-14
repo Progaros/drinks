@@ -1,33 +1,47 @@
 var game = {
     rollDice: async function() {
         document.getElementById("dice").style.display = "inline";
-        app.players[0].position += await game.rollDiceAnimation();
-        if (app.players[0].position > 100)
-        app.players[0].position = 100;
-        document.getElementById("gameField"+app.players[0].position).scrollIntoView({
+        app.game.buttons = [{action: ()=>{}, text: app.text.rollDice}];
+        var position = app.players[0].position += await game.rollDiceAnimation(app.players[0].luck);
+        if (position > (game.field.length-1))
+        position = app.players[0].position = game.field.length-1;
+        document.getElementById("gameField"+position).scrollIntoView({
                     behavior: 'smooth',
                     block: 'center',
                     inline: 'center'
                 });
-        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
-        app.game.text = game.field[app.players[0].position].action();
+        app.game.text = game.field[position].action();
+        if (game.field[position].onlyText == undefined)
+            app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
     },
-    rollDiceAnimation: async function(time){
+    rollDiceAnimation: async function(luck, time, number){
+        //setup
+        if(isNaN(luck))
+            luck = NaN;
         if(isNaN(time))
             time = 2;
-        var number = Math.ceil(Math.random()*6);
-        document.getElementById("dice").src = dice[number];
-        time += 2;
-        if(time>30)
+        if(isNaN(number))
+            number = 1;
+        var tempNumber;
+
+        do { //get new random number
+            tempNumber = Math.ceil( 6*Math.pow((Math.random()),1/luck));
+        } while (tempNumber == number)
+        number = tempNumber;
+
+        document.getElementById("dice").src = dice[number]; //set dice face
+
+        time ++;
+        if(time>10) // break condition
             return new Promise((resolve) => {
                 setTimeout(() => {
                     resolve(number);
-                }, Math.log(time)*50);
+                }, 200);
             });
-        return new Promise((resolve) => {
+        return new Promise((resolve) => { // roll again slower
             setTimeout(() => {
-                resolve(game.rollDiceAnimation(time));
-            }, Math.log(time)*50);
+                resolve(game.rollDiceAnimation(luck, time, number));
+            }, Math.log(time*3)*50);
           });
     },
     nextPlayer: function() {
@@ -40,16 +54,18 @@ var game = {
                     block: 'center',
                     inline: 'center'
                 });
-        //app.saveGame();
+        app.saveGame();
         app.game.buttons = [{action: game.rollDice, text: app.text.rollDice}];
         app.game.text = app.text.pressRollDice;
     },
-    field: [
+    field: [{},
         {
             action: function() {
-                return 1;
+                app.game.buttons = [{action: game.rollDice, text: app.text.rollDice}];
+                return "Nochmal Würfeln";
             },
-            color: "#ae0000"
+            onlyText: false
+            //,color: "#ae0000"
         },
         {
             action: function() {
@@ -93,8 +109,13 @@ var game = {
         },
         {
             action: function() {
-                return 10;
-            }
+                confetti.start();
+                app.resetSave();
+                app.game.buttons = [{action: app.resetGame, text: "Nochmal"}];
+                return "Glückwunsch "+app.players[0].name+",\ndu hast gewonnen!🎉";
+            },
+            onlyText: false,
+            color: "#b68f0e"
         },
     ]
 }

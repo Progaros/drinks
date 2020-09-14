@@ -12,5 +12,6 @@
 
 # Review
 - alcohol warning text
-- manual text (+icons?)
+- manual text (+turn icons?)
+  - luck distribution: https://olli.info/trinkspiel/luck.html
 - delete watch.js?

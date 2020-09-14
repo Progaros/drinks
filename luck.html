@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: black; color: #ccc;">
+    <input type="text" value="1" id="input">
+    <button onclick="luckTest(document.getElementById('input').value)">test</button><br>
+    <script>
+function luckTest (luck){
+    var t0 = performance.now();
+    var result = [0,0,0,0,0,0,0];
+    function rollDice(luck, time, number){
+        if(isNaN(number))
+            number = NaN;
+        if(isNaN(time))
+            time = 1;
+        time++;
+        var tempNumber;
+        do {
+            tempNumber = Math.ceil( 6*Math.pow((Math.random()),1/luck));
+        } while (tempNumber == number)
+        number = tempNumber;
+        if (time > 0)
+            return number;
+        return rollDice(luck, time, number)
+    }
+    for (let i = 0; i < 10000000; i++) {
+        var roll = rollDice(luck);
+        result[roll]++;
+    }
+    for (let i = 1; i < 7; i++) {
+        console.log(i + ": " + result[i]/100000);
+        document.body.innerHTML += i + ": " + result[i]/100000+"<br>";
+    }
+    var t1 = performance.now();
+    console.log("took " + Math.ceil((t1 - t0)) + " milliseconds.");
+    document.body.innerHTML += "took " + Math.ceil((t1 - t0)) + " milliseconds.<br><br>";
+}
+    </script>
+</body>
+</html>

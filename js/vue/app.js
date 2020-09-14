@@ -2,14 +2,17 @@ var app = new Vue({
     el: "#app",
     data: data,
     mounted() {
-        if (localStorage.getItem("playerList")) {
+        if (localStorage.getItem("lastTime")) { // show restoreProgress if lastPlayed < 10h
             try {
-                this.playerList = JSON.parse(localStorage.getItem('playerList'));
+                var lastTime = JSON.parse(localStorage.getItem('lastTime'));
+                if ((Date.now()-lastTime)/1000/60/60 < 10)
+                    if (localStorage.getItem("playerList"))
+                        this.show.restoreProgress = true;
             } catch(e) {
                 console.error(e);
-                localStorage.removeItem('playerList');
+                localStorage.removeItem('lastTime');
             }
-      }
+        }
       this.show.loadingScreen = false;
     },
     methods: methods,

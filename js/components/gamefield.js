@@ -5,8 +5,8 @@ var gameField = {
             return this.number==0 ? "Start" : this.number;
         },
         color: function() {
-            if (game.field[this.number-1] != undefined && game.field[this.number-1].color != undefined)
-                return game.field[this.number-1].color;
+            if (game.field[this.number] != undefined && game.field[this.number].color != undefined)
+                return game.field[this.number].color;
             return "#555";
         },
         players: function() {
