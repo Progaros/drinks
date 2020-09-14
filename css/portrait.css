@@ -1,0 +1,78 @@
+@media (orientation:portrait) {
+    #landscape {display: none;}
+    #addPlayersListOuter {
+        width: 50%;
+        min-height: 40vh;
+        max-height: 50vh;
+        margin: 0 25%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    #addPlayersList {
+        max-height: calc(50vh - 2.3em);
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+    #addPlayersList::-webkit-scrollbar {
+        display: none;
+    }
+    .addPlayersListItem{
+        width: calc(100% - 4px);
+        height: 2em;
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid #666;
+        outline: none;
+        margin: 0.3em -25px 0.3em 0;
+        padding: 1px 2px;
+        color: #ccc;
+        caret-color: white;
+    }
+    .removePlayersListButton{
+        background-color: #666;
+        padding: 0.2em;
+        border-radius: 50%;
+        width: 0.7em;
+        transform: rotate(45deg);
+        position: relative;
+        top: 0.25em;
+    }
+    .addPlayersListButton{
+        background-color: #ccc;
+        padding: 0.3em;
+        border-radius: 50%;
+        width: 1.1em;
+        margin: 0.3em 0;
+    }
+    #manual{
+        width: 60%;
+        margin: 1vh auto 3em auto;
+        white-space: pre-line;
+    }
+    footer{
+        font-size: 0.6em;
+        text-align: center;
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        height: 3em;
+        padding-top: 1em;
+        background-color: #181818;
+    }
+    .alcoholWarningButton {
+        margin: 1em; 
+        display: inline-block;
+    }
+    #alcoholWarningBack{
+        color: #daa;
+    }
+    #alcoholWarningOK{
+        color: #ada;
+    }
+    @media (max-height: 479px){
+        footer{
+            display: none;
+        }
+    }
+}

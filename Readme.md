@@ -23,9 +23,10 @@
 - manual text (+icons?)
 
 
-app.players[0].position += Math.ceil(Math.random()*6);
-document.getElementById("gameField"+app.players[0].position).scrollIntoView({
-            behavior: 'smooth',
-            block: 'center',
-            inline: 'center'
-        });
+// my-component.js
+export default {
+    name: 'my-component',
+    data !!!!!!! () {
+      return {}
+    }
+}

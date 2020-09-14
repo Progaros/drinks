@@ -10,11 +10,48 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="geo.region" content="DE">
     <title>Trinkspiel</title>
-    <link rel="stylesheet" href="css/style.css?3">
-    <link rel="icon" type="image/png" href="img/beer.svg">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/portrait.css">
+    <link rel="stylesheet" href="css/landscape.css">
+    <link rel="icon" type="image/png" href="img/icon.svg">
+    <style>
+        #loadingScreen {
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            background-color: #222;
+            z-index: 99;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        #loadingScreenIcon{
+            height: calc(11vw + 11vh);
+            margin-bottom: 4vh;
+            animation-name: pulse;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+        }
+        #loadingScreenText{
+            position: absolute;
+            top: 65vh;
+            font-size: calc(2.5vw + 1.5vh);
+        }
+        @keyframes pulse {
+            0%    {height: calc(11vw + 11vh);}
+            50%   {height: calc(8vw + 8vh);}
+            100%  {height: calc(11vw + 11vh);}
+        }
+    </style>
 </head>
 <body>
     <div id="app">
+        <div id="loadingScreen" v-if="show.loadingScreen">
+            <img id="loadingScreenIcon" src="img/icon.svg" alt=""><br>
+            <div  id="loadingScreenText">Lade Spieldaten...</div>
+        </div>
         <div id="portrait">
             <h1>{{ text.title }}</h1>
             <div id="addPlayersListOuter">
@@ -97,8 +134,15 @@
             </div>
         </div>
     </div>
-    <script src="js/vue.js?0"></script>
-    <script src="js/script.js?6"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+    <script src="js/vue.js"></script>
+    <script src="js/components/addPlayersListItem.js"></script>
+    <script src="js/components/gamefield.js"></script>
+    <script src="js/vue/text.js"></script>
+    <script src="js/vue/data.js"></script>
+    <script src="js/vue/methods.js"></script>
+    <script src="js/vue/computed.js"></script>
+    <script src="js/vue/app.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
