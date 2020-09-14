@@ -4,6 +4,11 @@ var gameField = {
         content: function() {
             return this.number==0 ? "Start" : this.number;
         },
+        color: function() {
+            if (game.field[this.number-1] != undefined && game.field[this.number-1].color != undefined)
+                return game.field[this.number-1].color;
+            return "#555";
+        },
         players: function() {
             return this.playersArray.filter(
                 function filterPosition(element) {
@@ -11,8 +16,11 @@ var gameField = {
                 this.number).slice().reverse();
         }
     },
-    template: `<div class="gameField">
-                    <div class="gameFieldText">{{ content }}</div>
+    template: `<div class="gameField"
+                    :style="'background-color:'+color">
+                    <div class="gameFieldText">
+                        {{ content }}
+                    </div>
                     <div class="playerContainer">
                         <div
                             v-for="(player, index) in players"

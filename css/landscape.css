@@ -1,4 +1,4 @@
-@media (orientation:landscape) {
+@media (orientation: landscape) {
     #portrait {display: none;}
     #landscape {
         height: 97vh;
@@ -40,8 +40,7 @@
         padding: 1vh;
         border: 1vh solid #444;
         border-radius: 3vh;
-        background: linear-gradient(0, transparent 0%, transparent 20%, #222 23%);
-        background-color: gray;
+        background: linear-gradient(0, transparent 0%, transparent 22%, #222 23%);
     }
     .gameFieldText{
         height: 0;
@@ -76,6 +75,16 @@
         left: -5vw;
         padding: 5vh 5vw 0vh 8vw;
         white-space: pre-line;
+    }
+    #dice{
+        display: none;
+        width: 7vw;
+        height: 7vw;
+        z-index: 1;
+        position: relative;
+        top: 3.5vh;
+        left: 1vw;
+        margin-top: -7vh;
     }
     #gameText{
         font-size: 5vh;

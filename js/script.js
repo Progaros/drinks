@@ -10,7 +10,16 @@ class Player {
 document.title = app.text.title;
 if (app.playerList.length == 0)
     for(let i=0;i<3;i++) //add players to addPlayerList
-        app.playerList.push(new Player);
+        app.playerList.push({name: "Spieler "+(i+1), position: 0});//new Player
+
+//preload images
+var dice = []
+for(let i=1;i<=6;i++) {
+    var img=new Image();
+    var url = "img/dice/"+i+".png";
+    img.src = url;
+    dice[i] = url;
+}
 
 //return to fullscreen
 if (document.addEventListener){ // TODO: if webapp ignore and go (stay?) fullscreen

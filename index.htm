@@ -123,8 +123,10 @@
                     <div 
                         id="playerName"
                     :style="'color:' + currentPlayerColor()"
-                    >{{ currentPlayerName() }}</div>
-                    <div id="gameText"></div>
+                    >{{ currentPlayerName() }}<img id="dice" src="img/dice/1.png" alt=""></img>
+                </div>
+                    
+                    <div id="gameText">{{ game.text }}</div>
                 </div>
                 <div id="gameButtons">
                     <div
@@ -143,6 +145,7 @@
     </div>
     <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
     <script src="js/vue.js"></script>
+    <script src="js/game/game.js"></script>
     <script src="js/components/addPlayersListItem.js"></script>
     <script src="js/components/gamefield.js"></script>
     <script src="js/vue/text.js"></script>

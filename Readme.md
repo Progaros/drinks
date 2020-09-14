@@ -7,9 +7,10 @@
 - write deploy script?
 - reset save on finish and user can do it?
 
-
-# Notes
+# ToDo
+- enable saving
 
 # Review
 - alcohol warning text
 - manual text (+icons?)
+- delete watch.js?

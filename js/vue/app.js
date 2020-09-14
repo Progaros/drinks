@@ -10,6 +10,7 @@ var app = new Vue({
                 localStorage.removeItem('playerList');
             }
       }
+      this.show.loadingScreen = false;
     },
     methods: methods,
     computed: computed,

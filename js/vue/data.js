@@ -1,13 +1,15 @@
 var data = {
     show: {
-        turnWarningOuter: true,
+        loadingScreen: true,
+        turnWarningOuter: false,
         alcoholWarningOuter: true
     },
     text: text,
     playerList: [],
     game: {
         started: false,
-        playerColors: ["white","yellow","orange","pink","tomato","red","green","darkgreen","turquoise","cyan","steelblue","slateblue","purple","chocolate","gold"],
-        buttons: []
+        playerColors: ["white","yellow","orange","pink","tomato","red","darkgreen","cyan","lightblue","steelblue","slateblue","purple","#a04300","#ff4fc3"],
+        buttons: [],
+        text: ""
     }
 }

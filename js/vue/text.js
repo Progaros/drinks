@@ -12,6 +12,7 @@ var text = {
     overlayWarning: "Bitte drehe das Gerät hochkant, um das Spiel zu starten.",
     continueGame: "Weiterspielen?",
     rollDice: "Würfeln",
+    pressRollDice: "Drücke auf Würfeln",
     nextPlayer: "Zug beenden",
     pleaseAddPlayers: "Bitte mindestens\n2 Spieler hinzufügen"
 }

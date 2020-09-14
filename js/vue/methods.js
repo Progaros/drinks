@@ -36,29 +36,6 @@ var methods = {
         var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
         requestMethod.call(element);
     },
-    rollDice: function() {
-        this.players[0].position += Math.ceil(Math.random()*2);
-        if (this.players[0].position > 100)
-            this.players[0].position = 100;
-        document.getElementById("gameField"+this.players[0].position).scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'center',
-                    inline: 'center'
-                });
-        app.game.buttons = [{action: app.nextPlayer, text: app.text.nextPlayer}];
-    },
-    nextPlayer: function() {
-        this.players.push(
-            this.players.splice(0,1)[0] //next player
-        );
-        document.getElementById("gameField"+this.players[0].position).scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'center',
-                    inline: 'center'
-                });
-        this.saveGame();
-        app.game.buttons = [{action: app.rollDice, text: app.text.rollDice}];
-    },
     currentPlayerColor: function() {
         if (this.players.length > 1)
             return this.players[0].color;

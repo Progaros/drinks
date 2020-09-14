@@ -14,7 +14,8 @@ var computed = {
         });
         if(!this.game.started && players.length > 1){
             this.game.started = true;
-            app.game.buttons = [{action: app.rollDice, text: app.text.rollDice}];
+            app.game.buttons = [{action: game.rollDice, text: app.text.rollDice}];
+            app.game.text = "Drücke auf Würfeln";
         }
         return players;
     }
