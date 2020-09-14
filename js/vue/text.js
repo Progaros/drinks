@@ -1,5 +1,6 @@
 var text = {
-    title: "Spiel",
+    //loadingGameData: "Lade Spieldaten..." in HTML because needed before VUE loads
+    title: "Drinks!", //also in HTML but will be overwritten with this
     player: "Spieler",
     manual: "Drehe das Handy ins Querformat, um das Spiel zu starten.\n"+
             "Drehe es zurück, um Spieler zu bearbeiten oder hinzuzufügen.",
@@ -12,5 +13,5 @@ var text = {
     continueGame: "Weiterspielen?",
     rollDice: "Würfeln",
     nextPlayer: "Zug beenden",
-    pleaseAddPlayers: "Bitte Spieler hinzufügen"
+    pleaseAddPlayers: "Bitte mindestens\n2 Spieler hinzufügen"
 }

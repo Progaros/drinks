@@ -11,7 +11,6 @@ document.title = app.text.title;
 if (app.playerList.length == 0)
     for(let i=0;i<3;i++) //add players to addPlayerList
         app.playerList.push(new Player);
-        app.game.buttons = [{action: app.rollDice, text: app.text.rollDice}];
 
 //return to fullscreen
 if (document.addEventListener){ // TODO: if webapp ignore and go (stay?) fullscreen

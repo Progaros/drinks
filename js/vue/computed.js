@@ -12,6 +12,10 @@ var computed = {
                     p.color = "#"+(Math.random()*0xBBBBBB+0x444444<<0).toString(16); //random color >= #444
             }
         });
+        if(!this.game.started && players.length > 1){
+            this.game.started = true;
+            app.game.buttons = [{action: app.rollDice, text: app.text.rollDice}];
+        }
         return players;
     }
 }

@@ -46,7 +46,7 @@
     .gameFieldText{
         height: 0;
         position: relative;
-        top: 22vh;
+        top: 22.5vh;
         text-align: center;
         font-size: 6vh;
     }
@@ -75,6 +75,7 @@
         background-color: #222;
         left: -5vw;
         padding: 5vh 5vw 0vh 8vw;
+        white-space: pre-line;
     }
     #gameText{
         font-size: 5vh;

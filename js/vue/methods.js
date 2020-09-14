@@ -56,16 +56,17 @@ var methods = {
                     block: 'center',
                     inline: 'center'
                 });
+        this.saveGame();
         app.game.buttons = [{action: app.rollDice, text: app.text.rollDice}];
     },
     currentPlayerColor: function() {
-        if (this.players.length>0)
+        if (this.players.length > 1)
             return this.players[0].color;
         else
             return '#ccc';
     },
     currentPlayerName: function() {
-        if (this.players.length>0)
+        if (this.players.length > 1)
             return this.players[0].name;
         else
             return this.text.pleaseAddPlayers;

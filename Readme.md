@@ -3,30 +3,13 @@
 - Event fields
 - Optional good/bad luck fields (player can choose to use them)
 - Luck variable, bonus/punishment fields
-- save game in cookies
-- loading screen?
 - if on desktop show qrcode for phone
 - write deploy script?
-- cocktail glass as icon
-- newest player on top
-- fit text always in task box
-- save on Zug beenden
+- reset save on finish and user can do it?
 
 
 # Notes
-- flexbox for actual game? (https://www.w3schools.com/css/css3_flexbox.asp)
-- ENABLE fullscreen button
 
 # Review
-- deletePlayerListItemButton neccesary?
 - alcohol warning text
 - manual text (+icons?)
-
-
-// my-component.js
-export default {
-    name: 'my-component',
-    data !!!!!!! () {
-      return {}
-    }
-}
