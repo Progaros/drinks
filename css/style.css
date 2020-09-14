@@ -2,7 +2,7 @@ body {
     margin: 0;
 }
 #app {
-    min-width: 100%;
+    width: 100vw;
     height: 100vh;
     position: absolute;
     top: 0;
@@ -13,7 +13,7 @@ body {
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    overflow-y: hidden;
+    overflow: hidden;
 }
 h1{
     text-align: center;
@@ -150,7 +150,7 @@ a {
         border: 0.5vh solid #0004;
         margin-top: -1.5vh;
         position: absolute;
-        transition: left 0.5s;
+        /* transition: left 0.5s; */
     }
     #gameBoard{
         width: max-content;
@@ -198,14 +198,15 @@ a {
         position: relative;
         background-color: #222;
         left: -5vw;
-        padding: 5vh 5vw 0vh 5vw;
+        padding: 5vh 5vw 0vh 8vw;
     }
     #gameText{
         font-size: 5vh;
+        max-height: 26vh;
         position: relative;
         background-color: #222;
         left: -5vw;
-        padding: 4vh 5vw;
+        padding: 4vh 5vw 2vh 8vw;
     } 
     #gameButtons{
         height: 56vh;
@@ -222,5 +223,6 @@ a {
         border-radius: 3vh;
         border: 1vh solid #444;
         text-align: center;
+        white-space: pre-line;
     }
 }

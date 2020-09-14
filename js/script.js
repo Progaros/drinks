@@ -17,13 +17,14 @@ var app = new Vue({
             ok: "OK",
             overlayWarning: "Bitte drehe das Gerät hochkant, um das Spiel zu starten.",
             continueGame: "Weiterspielen?",
-            gameButton: "Würfeln",
+            rollDice: "Würfeln",
+            nextPlayer: "Zug beenden",
             pleaseAddPlayers: "Bitte Spieler hinzufügen"
         },
         playerList: [{name:"Player1",position:0},{name:"Player2",position:0},{name:"Player3",position:0}],
         game: {
-            currentPlayer: 0,
-            playerColors: ["white","yellow","orange","pink","tomato","red","green","darkgreen","turquoise","cyan","steelblue","slateblue","purple","chocolate","gold"] //lime
+            playerColors: ["white","yellow","orange","pink","tomato","red","green","darkgreen","turquoise","cyan","steelblue","slateblue","purple","chocolate","gold"],
+            buttons: []
         }
     },
     mounted() {
@@ -75,16 +76,38 @@ var app = new Vue({
             requestMethod.call(element);
         },
         rollDice: function() {
-            this.players[this.game.currentPlayer].position += Math.ceil(Math.random()*6);
-            if (this.players[this.game.currentPlayer].position > 100)
-                this.players[this.game.currentPlayer].position = 100;
-            document.getElementById("gameField"+this.players[this.game.currentPlayer].position).scrollIntoView({
+            this.players[0].position += Math.ceil(Math.random()*2);
+            if (this.players[0].position > 100)
+                this.players[0].position = 100;
+            document.getElementById("gameField"+this.players[0].position).scrollIntoView({
                         behavior: 'smooth',
                         block: 'center',
                         inline: 'center'
                     });
-            this.game.currentPlayer++;
-            this.game.currentPlayer %= this.players.length;
+            app.game.buttons = [{action: app.nextPlayer, text: app.text.nextPlayer}];
+        },
+        nextPlayer: function() {
+            this.players.push(
+                this.players.splice(0,1)[0] //next player
+            );
+            document.getElementById("gameField"+this.players[0].position).scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center',
+                        inline: 'center'
+                    });
+            app.game.buttons = [{action: app.rollDice, text: app.text.rollDice}];
+        },
+        currentPlayerColor: function() {
+            if (this.players.length>0)
+                return this.players[0].color;
+            else
+                return '#ccc';
+        },
+        currentPlayerName: function() {
+            if (this.players.length>0)
+                return this.players[0].name;
+            else
+                return this.text.pleaseAddPlayers;
         }
     },
     computed: {
@@ -102,19 +125,9 @@ var app = new Vue({
                 }
             });
             return players;
-        },
-        currentPlayerColor: function() {
-            if (this.players.length>0)
-                return this.players[this.game.currentPlayer].color;
-            else
-                return '#ccc';
-        },
-        currentPlayerName: function() {
-            if (this.players.length>0)
-                return this.players[this.game.currentPlayer].name;
-            else
-                return this.text.pleaseAddPlayers;
         }
+    },
+    watch: {
     },
     components: {
         addPlayersListItem: {
@@ -152,7 +165,7 @@ var app = new Vue({
                     return this.playersArray.filter(
                         function filterPosition(element) {
                             return element.position == this;}, 
-                        this.number);
+                        this.number).slice().reverse();
                 }
             },
             template: `<div class="gameField">
@@ -165,14 +178,6 @@ var app = new Vue({
                                     class="player">
                                 </div>
                             </div>
-                        </div>`
-        },
-        gameButton: {
-            props: ["text"],
-            template: `<div
-                            class="gameButton"
-                            @click="$emit('button-action')">
-                                {{ text.gameButton }}
                         </div>`
         }
     }
@@ -191,6 +196,7 @@ document.title = app.text.title;
 if (app.playerList.length == 0)
     for(let i=0;i<3;i++) //add players to addPlayerList
         app.playerList.push(new Player);
+        app.game.buttons = [{action: app.rollDice, text: app.text.rollDice}];
 
 //return to fullscreen
 if (document.addEventListener){ // TODO: if webapp ignore and go (stay?) fullscreen
