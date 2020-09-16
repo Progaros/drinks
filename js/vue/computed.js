@@ -20,6 +20,6 @@ var computed = {
         return players;
     },
     fields: function() {
-        return game.field;
+        return game.fields;
     }
 }

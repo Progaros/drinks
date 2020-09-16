@@ -53,3 +53,21 @@ a {
 .warningYes{
     color: #ada;
 }
+.slideUpInfo{
+    background-color: #333;
+    position: absolute;
+    text-align: center;
+}
+.slideUpInfoButton{
+    margin: 3vh 4vw;
+    display: inline-block;
+}
+.slideUpInfoButtonYes{
+    color: #ada;
+}
+.slideUpInfoButtonNo{
+    color: #daa;
+}
+.slideUp-enter-active, .slideUp-leave-active {
+    transition: bottom .7s ease-out;
+}

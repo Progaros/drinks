@@ -5,6 +5,7 @@
         height: 100vh;
         position: absolute;
         top: 0;
+        width: 100vw;
     }
     #addPlayersListOuter {
         width: 50%;
@@ -55,6 +56,7 @@
         width: 60%;
         margin: 1vh auto 3em auto;
         white-space: pre-line;
+        font-size: 5vw;
     }
     footer{
         font-size: 0.6em;
@@ -70,5 +72,16 @@
         footer{
             display: none;
         }
+    }
+    .slideUpInfo{
+        height: 15vh;
+        width: 100vw;
+        bottom: -1vh;
+        padding-top: 3vh;
+        border-radius: 1vh;
+        font-size: 5vw;
+    }
+    .slideUp-enter, .slideUp-leave-to {
+        bottom: -25vh;
     }
 }

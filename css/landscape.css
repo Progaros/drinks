@@ -116,4 +116,17 @@
         width: -moz-available;
         width: -webkit-fill-available;
     }
+    .slideUpInfo{
+        height: 33vh;
+        width: calc(40vh + 40vw);
+        bottom: -2vw;
+        padding-top: 3vh;
+        border-radius: 2vw;
+        font-size: calc(2.5vh + 1.5vw);
+        left: calc(50vw - 20vh - 20vw);
+        border: 1vh solid #666;
+    }
+    .slideUp-enter, .slideUp-leave-to {
+        bottom: -40vh;
+    }
 }

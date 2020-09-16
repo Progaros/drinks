@@ -1,9 +1,11 @@
 class Player {
     constructor(name) {
-        this.name = name;
+        this.name;
         this.color;
         this.position = 0;
         this.luck = 1;
+        if(name != undefined)
+            this.name = name;
     }
     changeLuck(change) {
         this.luck += change;
@@ -16,10 +18,10 @@ class Player {
 };
 
 //setup
-document.title = app.text.title;
+document.title = app.text.browserTitle;
 if (app.playerList.length == 0)
     for(let i=0;i<3;i++) //add players to addPlayerList
-        app.playerList.push(new Player("Spieler "+(i+1)));//new Player
+        app.playerList.push(new Player(i));//new Player
 
 //preload images
 var dice = []
@@ -40,7 +42,28 @@ if (document.addEventListener){ // TODO: if webapp ignore and go (stay?) fullscr
     if (!document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement){
         app.text.alcoholWarning = app.text.continueGame;
         app.show.alcoholWarning = true;
+        app.show.turnWarning = true;
     }
 }
         
-//app.show.alcoholWarning = false; app.show.turnWarning = false;  //enable for debugging
+app.show.alcoholWarning = false; app.show.turnWarning = false;  //enable for debugging // TODO disable
+
+//service worker
+if ("serviceWorker" in navigator){
+    window.addEventListener("load", () => {
+        navigator.serviceWorker.register("serviceWorker.js")
+    });
+    const swListener = new BroadcastChannel("swListener");
+    swListener.onmessage = function(e) {
+        if(e.data == "update") //alert on update
+            app.slideUpInfoYes = function() {
+                app.show.slideUpInfo = false;
+                location.reload();
+            }
+            app.slideUpInfoNo = function() {
+                app.show.slideUpInfo = false;
+            }
+            app.text.slideUpInfo = app.text.update;
+            app.show.slideUpInfo = true;
+    };
+}

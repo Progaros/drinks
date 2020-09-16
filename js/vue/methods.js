@@ -33,9 +33,7 @@ var methods = {
         localStorage.setItem('lastTime', JSON.stringify(Date.now()));
     },
     resetSave: function(){
-        var resetedPlayers = JSON.parse(JSON.stringify(app.players));
-        resetedPlayers.forEach(p => {p.position=0; p.luck=1});
-        localStorage.setItem('playerList', JSON.stringify(resetedPlayers));
+        localStorage.removeItem('playerList');
     },
     resetGame: function(){
         confetti.stop();
@@ -51,22 +49,6 @@ var methods = {
                 block: 'end',
         });
     },
-    notRestoreGame: function() {
-        this.show.restoreProgress = false;
-        localStorage.removeItem('playerList');
-    },
-    restoreGame: function() {
-        this.show.restoreProgress = false;
-        if (localStorage.getItem("playerList")) {
-            try {
-                this.playerList = JSON.parse(localStorage.getItem('playerList'));
-            } catch(e) {
-                alert("an error occured");
-                console.error(e);
-                localStorage.removeItem('playerList');
-            }
-        }
-    },
     requestFullscreen: function() {
         var element = document.body;
         var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
@@ -78,10 +60,28 @@ var methods = {
         else
             return '#ccc';
     },
+    currentPlayerDisplay: function() {
+        if (this.players.length > 1)
+            return "block";
+        else
+            return "table";
+    },
     currentPlayerName: function() {
         if (this.players.length > 1)
             return this.players[0].name;
         else
             return this.text.pleaseAddPlayers;
+    },
+    scrollToPlayer: function() {
+        document.getElementById("gameField"+app.players[0].position)
+        .scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+            inline: 'center'
+        });
+    },
+    slideUpInfoYes: function() {
+    },
+    slideUpInfoNo: function() {
     }
 }

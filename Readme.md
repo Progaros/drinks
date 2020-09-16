@@ -6,12 +6,21 @@
 - if on desktop show qrcode for phone
 - write deploy script?
 - reset save on finish and user can do it?
+- after x rounds help last player?
 
 # ToDo
-- enable saving
+- enable warnings
+- use VueMin
+- rmeove generated players
 
 # Review
 - alcohol warning text
 - manual text (+turn icons?)
   - luck distribution: https://olli.info/trinkspiel/luck.html
+  - to reset game reload page
+  - possibility to add players while playing
 - delete watch.js?
+- meta name description
+
+# ERROR
+- move player not always current player

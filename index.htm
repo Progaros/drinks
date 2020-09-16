@@ -9,11 +9,14 @@
     <meta name="google" content="nositelinkssearchbox">
     <meta name="format-detection" content="telephone=no">
     <meta name="geo.region" content="DE">
-    <title>Trinkspiel</title>
+    <meta name="description" content="Ein modernes, lustiges Trinkspiel">
+    <title>Drinks!</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/portrait.css">
     <link rel="stylesheet" href="css/landscape.css">
-    <link rel="icon" type="image/png" href="img/icon.svg">
+    <link rel="icon" type="image/png" href="img/icon.png">
+    <link rel="apple-touch-icon" href="img/icon.png">
+    <link rel="manifest" href="manifest.json">
     <style>
         #loadingScreen {
             position: absolute;
@@ -39,12 +42,12 @@
             font-size: calc(2.5vw + 1.5vh);
             animation: fade-in 2s ease-in-out;
         }
-        
+
         @keyframes fade-in {
             0%    {filter: opacity(0);}
             100%  {filter: opacity(1);}
         }
-        
+
         @keyframes pulse {
             0%    {height: calc(11vw + 11vh);}
             50%   {height: calc(8vw + 8vh);}
@@ -55,16 +58,8 @@
 <body>
     <div id="app">
 
-    <div class="overlayWarningOuter" v-if="show.restoreProgress">
-        <div class="overlayWarning">
-            {{ text.restoreProgress }}<br>
-            <div @click="notRestoreGame" class="warningButton warningNo">{{ text.no }}</div>
-            <div @click="restoreGame" class="warningButton warningYes">{{ text.yes }}</div>
-        </div>
-    </div>
-
         <div id="loadingScreen" v-if="show.loadingScreen">
-            <img id="loadingScreenIcon" 
+            <img id="loadingScreenIcon"
                 src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='512' viewBox='0 0 512 512' height='512' enable-background='new 0 0 512 512'> <g> <g> <circle style='fill:%2390ff7c;fill-opacity:1' r='256' fill='%231dd882' cy='256' cx='256' /> </g> <path style='fill:%23000000;fill-opacity:0.19417473' d='m 272.14574,511.44052 c 68.31568,-4.29973 128.42101,-34.90414 170.87931,-80.63356 40.71276,-43.84939 69.35607,-104.59333 68.48348,-175.49005 -0.003,-0.22767 0.6045,-3.16624 0.30936,-9.0509 -1.04494,-20.83397 -2.98188,-36.96552 -10.36966,-63.04144 L 379.11765,73.505503 245.44022,275.56125 256,416.783 199.312,452 Z' /> <g> <path style='fill:%23ffffff;stroke-width:1.0449878' d='m 275.547,332.64445 132.358,-196.09472 -303.81,10e-4 132.358,196.09363 -0.19176,92.87248 -36.94924,-0.19176 0,26.67492 h 113.376 l 0,-26.67483 h -37.33276 z' /> </g> <g transform='matrix(1,0,0,1.0919995,0,-41.583784)' > <path style='fill:%23000000;fill-opacity:0.07843137' d='M 275.547,342.7 407.905,163.126 H 256.042 V 452 h 56.646 l 0,-24.4275 h -37.33276 z' /> </g> <g transform='matrix(1.2002109,0,0,1.3109482,-51.253991,-88.154573)' > <path style='fill:%23ffce00' d='M 330.168,220.398 H 181.832 L 256,321.024 Z' /> </g> <g > <path style='fill:%23fdba12' d='M 255.68845,200.59901 256,332.69126 345.01724,200.77579 Z' /> </g> <g transform='matrix(1.1931592,0,0,1.1931592,-49.441335,-47.870127)' > <g > <path style='fill:%23525760;fill-opacity:1' transform='matrix(0.488,-0.873,0.873,0.488,11.333,356.25)' d='m 226.79277,157.49072 165.77016,0.40425 -0.6777,21.54331 -165.10981,1.43575 z' /> </g> </g> <g > <circle style='fill:%23f81401;fill-opacity:1' r='30.624' fill='%231dd882' cy='198.995' cx='293.266' /> </g> </g> </svg>"
                 alt="">
             <div  id="loadingScreenText">Lade Spieldaten...</div>
@@ -94,7 +89,7 @@
                 <a class="text-muted" href="/imprint.html">Impressum</a><br>
                 <div>© Oliver Großkloß</div>
             </footer>
-    
+
             <div class="overlayWarningOuter" id="alcoholWarningOuter" v-if="show.alcoholWarning">
                 <div class="overlayWarning">
                     {{ text.alcoholWarning }}<br>
@@ -129,13 +124,13 @@
             </div>
             <div id="gameContent">
                 <div id="gameTextOuter">
-                    <div 
+                    <div
                         id="playerName"
-                    :style="'color:' + currentPlayerColor()"
+                    :style="'color:' + currentPlayerColor() + '; display: ' + currentPlayerDisplay()"
                     >{{ currentPlayerName() }}<img id="dice" src="img/dice/1.png" alt=""></img>
                 </div>
-                    
-                    <div id="gameText">{{ game.text }}</div>
+
+                    <div id="gameText"><span v-html="game.text"></span></div>
                 </div>
                 <div id="gameButtons">
                     <div
@@ -151,10 +146,30 @@
                 <div class="overlayWarning">{{ text.overlayWarning}}</div>
             </div>
         </div>
+
+        <transition name="slideUp">
+            <div class="slideUpInfo" v-if="show.slideUpInfo">
+                <div>{{ text.slideUpInfo }}</div>
+                <div>
+                    <div @click="show.slideUpInfo = false" class="slideUpInfoButton slideUpInfoButtonNo">{{ text.no }}</div>
+                    <div @click="slideUpInfoYes" class="slideUpInfoButton slideUpInfoButtonYes">{{ text.yes }}</div>
+                </div>
+            </div>
+        </transition>
+
+        <div class="overlayWarningOuter" v-if="show.restoreProgress">
+            <div class="overlayWarning">
+                {{ text.restoreProgress }}<br>
+                <div @click="notRestoreGame" class="warningButton warningNo">{{ text.no }}</div>
+                <div @click="restoreGame" class="warningButton warningYes">{{ text.yes }}</div>
+            </div>
+        </div>
+
     </div>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
-    <script src="js/vue.js"></script>
-    <script src="js/game/game.js"></script>
+
+    <script src="js/vueMin.js"></script>
+    <!-- <script src="js/vue.js"></script> -->
+    <script src="js/game.js"></script>
     <script src="js/components/addPlayersListItem.js"></script>
     <script src="js/components/gamefield.js"></script>
     <script src="js/vue/text.js"></script>

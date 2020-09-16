@@ -3,7 +3,7 @@ var data = {
         loadingScreen: true,
         turnWarning: true,
         alcoholWarning: true,
-        restoreProgress: false
+        slideUpInfo: false
     },
     text: text,
     playerList: [],
