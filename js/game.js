@@ -59,8 +59,7 @@ var game = {
             action: function() {
                 app.game.buttons = [{action: game.rollDice, text: app.text.rollDice}];
                 return "Du darfst nochmal würfeln";
-            },
-            onlyText: false
+            }
         },
         {// 2
             action: function() {
@@ -72,9 +71,11 @@ var game = {
                 setTimeout(() => {
                     app.players[0].position -= 2;
                     app.scrollToPlayer();
+                    app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
                 }, 1000);
                 return "Gehe 2 Felder zurück";
-            }
+            },
+            onlyText: false
         },
         {// 4
             action: function() {
@@ -86,9 +87,11 @@ var game = {
                 setTimeout(() => {
                     app.players[0].position = 21;
                     app.scrollToPlayer();
+                    app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
                 }, 1000);
                 return "Du gehts auf Feld 21";
-            }
+            },
+            onlyText: false
         },
         {// 6
             action: function() {
@@ -216,9 +219,11 @@ var game = {
                 setTimeout(() => {
                     app.players[0].position -= 10;
                     app.scrollToPlayer();
+                    app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
                 }, 1000);
                 return "Gehe 10 Felder zurück";
-            }
+            },
+            onlyText: false
         },
         {// 28
             action: function() {
@@ -363,9 +368,11 @@ var game = {
                 setTimeout(() => {
                     app.players[0].position = 36;
                     app.scrollToPlayer();
+                    app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
                 }, 1000);
                 return "Du gehts auf Feld 36";
-            }
+            },
+            onlyText: false
         },
         {// 50
             action: function() {
@@ -435,9 +442,11 @@ var game = {
                 setTimeout(() => {
                     app.players[0].position += 5;
                     app.scrollToPlayer();
+                    app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
                 }, 1000);
                 return "Rücke 5 Felder vor";
-            }
+            },
+            onlyText: false
         },
         {// 61
             action: function() {
@@ -464,18 +473,22 @@ var game = {
                 setTimeout(() => {
                     app.players[0].position -= 6;
                     app.scrollToPlayer();
+                    app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
                 }, 1000);
                 return "Gehe 6 Felder zurück";
-            }
+            },
+            onlyText: false
         },
         {// 66
             action: function() {
                 setTimeout(() => {
                     app.players[0].position += 2;
                     app.scrollToPlayer();
+                    app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
                 }, 1000);
                 return "Gehe 2 Felder vor und trinke";
-            }
+            },
+            onlyText: false
         },
         {// 67
             action: function() {
@@ -491,9 +504,11 @@ var game = {
             action: function() {
                 setTimeout(() => {
                     app.game.text = "Bestimme einen der 2 Trinken soll"
+                    app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
                 }, 1000);
                 return "Bestimme einen der 69 Trinken soll";
-            }
+            },
+            onlyText: false
         },
         {// 70
             action: function() {
@@ -505,8 +520,8 @@ var game = {
                 setTimeout(() => {
                     app.players[0].position = 50;
                     app.scrollToPlayer();
+                    app.game.buttons = [{action: game.rollDice, text: app.text.rollDice}];
                 }, 1000);
-                app.game.buttons = [{action: game.rollDice, text: app.text.rollDice}];
                 return "Gehe auf das Feld 50 und Würfel noch einmal";
             },
             onlyText: false
@@ -561,9 +576,11 @@ var game = {
                 setTimeout(() => {
                     app.players[0].position = 69;
                     app.scrollToPlayer();
+                    app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
                 }, 1000);
                 return "Gehe auf Feld 69 zurück";
-            }
+            },
+            onlyText: false
         },
         {// 82
             action: function() {
@@ -648,9 +665,11 @@ var game = {
                 setTimeout(() => {
                     app.players[0].position = 69;
                     app.scrollToPlayer();
+                    app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
                 }, 1000);
                 return "Gehe auf Feld 69 zurück";
-            }
+            },
+            onlyText: false
         },
         {// 97
             action: function() {
@@ -674,9 +693,11 @@ var game = {
             action: function() {
                 setTimeout(() => {
                     app.game.text += "\nTrinken reicht, du hast es fast ;)"
+                    app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
                 }, 2500);
                 return "Trink und gehe auf START zurück";
-            }
+            },
+            onlyText: false
         },
         {// 100
             action: function() {

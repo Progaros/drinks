@@ -35,7 +35,7 @@ a {
 }
 .overlayWarning{
     position: absolute;
-    bottom: calc(50vh - 4em);
+    bottom: calc(50vh - 2em);
     left: 20%;
     width: calc(60% - 4em);
     overflow: auto;

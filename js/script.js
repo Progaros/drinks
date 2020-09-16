@@ -21,7 +21,7 @@ class Player {
 document.title = app.text.browserTitle;
 if (app.playerList.length == 0)
     for(let i=0;i<3;i++) //add players to addPlayerList
-        app.playerList.push(new Player(i));//new Player
+        app.playerList.push(new Player());//new Player
 
 //preload images
 var dice = []
@@ -46,7 +46,7 @@ if (document.addEventListener){ // TODO: if webapp ignore and go (stay?) fullscr
     }
 }
         
-app.show.alcoholWarning = false; app.show.turnWarning = false;  //enable for debugging // TODO disable
+//app.show.alcoholWarning = false; app.show.turnWarning = false;  //enable for debugging // TODO disable
 
 //service worker
 if ("serviceWorker" in navigator){

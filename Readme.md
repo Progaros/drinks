@@ -23,4 +23,3 @@
 - meta name description
 
 # ERROR
-- move player not always current player
