@@ -5,7 +5,9 @@ var text = {
     title: "Drinks!", //also in HTML but will be overwritten with this
     browserTitle: "Drinks! - das Trinkspiel im Browser",
     player: "Spieler",
-    manual: "Drehe das Handy ins Querformat, um das Spiel zu starten.\n"+
+    manual: "Testversion: Verbesserungsvorschläge bitte an <a href='mailto:oliver.grosskloss+trinken@gmail.com' style='color: #4e88df; text-decoration: underline;'>diese</a> Adresse\n"+
+            "\n"+
+            "Drehe das Handy ins Querformat, um das Spiel zu starten.\n"+
             "Drehe es zurück, um Spieler zu bearbeiten oder hinzuzufügen.",
     alcoholWarning: "Alkohol ist schädlich. "+
                     "Mit dem Fortfahren bestätigt ihr für alle eventuellen Konsequenzen selbst verantwortlich zu sein. "+

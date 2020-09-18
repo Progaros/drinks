@@ -22,6 +22,7 @@
         height: 1vh;
         background-color: #444;
         margin: 4vh 2vw 3vh 2vw;
+        border-radius: 1vh;
     }
     .playerMini {
         width: 3vh;

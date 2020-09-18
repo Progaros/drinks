@@ -81,9 +81,7 @@
                 </div>
                 <img @click="addPlayersListItem()" src="img/plus.svg" alt="+" class="addPlayersListButton">
             </div>
-            <div id="manual">
-                {{ text.manual }}
-            </div>
+            <div id="manual" v-html="text.manual"></div>
             <footer>
                 <a class="text-muted" href="/privacyPolicy.html">Datenschutzerklärung</a> |
                 <a class="text-muted" href="/imprint.html">Impressum</a><br>
