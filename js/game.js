@@ -59,7 +59,8 @@ var game = {
             action: function() {
                 app.game.buttons = [{action: game.rollDice, text: app.text.rollDice}];
                 return "Du darfst nochmal würfeln";
-            }
+            },
+            onlyText: false
         },
         {// 2
             action: function() {
@@ -135,7 +136,7 @@ var game = {
         },
         {// 14
             action: function() {
-                return "Alle, die eine Uhr tragen, Trinken";
+                return "Alle, die keine Uhr tragen, Trinken";
             }
         },
         {// 15
@@ -189,7 +190,7 @@ var game = {
         },
         {// 22
             action: function() {
-                return "";
+                return "Spiele einmal Wahrheit oder Pflicht";
             }
         },
         {// 23
@@ -220,7 +221,7 @@ var game = {
                     app.players[0].position -= 10;
                     app.scrollToPlayer();
                     app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
-                }, 1000);
+                }, 1500);
                 return "Gehe 10 Felder zurück";
             },
             onlyText: false

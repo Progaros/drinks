@@ -2,8 +2,7 @@ var data = {
     show: {
         loadingScreen: true,
         turnWarning: true,
-        alcoholWarning: true,
-        slideUpInfo: false
+        alcoholWarning: true
     },
     text: text,
     playerList: [],
@@ -12,5 +11,7 @@ var data = {
         playerColors: ["white","yellow","orange","pink","tomato","red","darkgreen","cyan","lightblue","steelblue","slateblue","purple","#a04300","#ff4fc3"],
         buttons: [],
         text: ""
-    }
+    },
+    slideUpInfos: [],
+    overlayWarnings: []
 }

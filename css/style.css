@@ -32,19 +32,23 @@ a {
     height: 100vh;
     background-color: #181818;
     z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .overlayWarning{
-    position: absolute;
-    bottom: calc(50vh - 2em);
-    left: 20%;
-    width: calc(60% - 4em);
-    overflow: auto;
     padding: 2em;
     background-color: #444;
-    line-height: 1.3em;
+    margin: 5vh 15vw;
+    text-align: inherit;
+}
+.overlayWarnigButtons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .warningButton {
-    margin: 1em;
+    margin: 2vh auto 0 auto;
     display: inline-block;
 }
 .warningNo{
@@ -69,5 +73,5 @@ a {
     color: #daa;
 }
 .slideUp-enter-active, .slideUp-leave-active {
-    transition: bottom .7s ease-out;
+    transition: bottom .7s ease-in-out;
 }

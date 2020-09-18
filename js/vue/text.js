@@ -14,7 +14,7 @@ var text = {
     ok: "OK",
     yes: "Ja",
     no: "Nein",
-    overlayWarning: "Bitte drehe das Gerät hochkant, um das Spiel zu starten.",
+    turnPortrait: "Bitte drehe das Gerät hochkant, um das Spiel zu starten.",
     continueGame: "Weiterspielen?",
     rollDice: "Würfeln",
     pressRollDice: "Drücke auf Würfeln",

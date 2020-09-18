@@ -147,28 +147,31 @@
             </div>
         </div>
 
-        <transition name="slideUp">
-            <div class="slideUpInfo" v-if="show.slideUpInfo">
-                <div>{{ text.slideUpInfo }}</div>
+        <transition-group name="slideUp">
+            <div class="slideUpInfo" v-for="slideUpInfo in slideUpInfos" :key="slideUpInfo.text">
+                <div>{{ slideUpInfo.text }}</div>
                 <div>
-                    <div @click="show.slideUpInfo = false" class="slideUpInfoButton slideUpInfoButtonNo">{{ text.no }}</div>
-                    <div @click="slideUpInfoYes" class="slideUpInfoButton slideUpInfoButtonYes">{{ text.yes }}</div>
+                    <div @click="slideUpInfo.no()" class="slideUpInfoButton slideUpInfoButtonNo">{{ text.no }}</div>
+                    <div @click="slideUpInfo.yes()" class="slideUpInfoButton slideUpInfoButtonYes">{{ text.yes }}</div>
                 </div>
             </div>
-        </transition>
+        </transition-group>
 
-        <div class="overlayWarningOuter" v-if="show.restoreProgress">
+        <div class="overlayWarningOuter" v-for="overlayWarning in overlayWarnings" :key="overlayWarning.text">
             <div class="overlayWarning">
-                {{ text.restoreProgress }}<br>
-                <div @click="notRestoreGame" class="warningButton warningNo">{{ text.no }}</div>
-                <div @click="restoreGame" class="warningButton warningYes">{{ text.yes }}</div>
+                <span class="portrait">{{ overlayWarning.text }}</span>
+                <span class="landscape">{{ text.turnPortrait }}</span><br>
+            <div class="overlayWarnigButtons">
+                <div @click="overlayWarning.no" class="portrait warningButton warningNo">{{ text.no }}</div>
+                <div @click="overlayWarning.yes" class="portrait warningButton warningYes">{{ text.yes }}</div>
+            </div>
             </div>
         </div>
 
     </div>
 
-    <script src="js/vueMin.js"></script>
-    <!-- <script src="js/vue.js"></script> -->
+    <!-- <script src="js/vueMin.js"></script> -->
+    <script src="js/vue.js"></script>
     <script src="js/game.js"></script>
     <script src="js/components/addPlayersListItem.js"></script>
     <script src="js/components/gamefield.js"></script>

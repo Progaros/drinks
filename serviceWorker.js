@@ -1,6 +1,6 @@
 "use strict";
 const swListener = new BroadcastChannel("swListener");
-const cacheName = "cache-v2";
+const cacheName = "cache-v0.1";
 var oldCache = false;
 const precacheResources = [
     "./",
@@ -17,6 +17,7 @@ const precacheResources = [
     "img/dice/4.png",
     "img/dice/5.png",
     "img/dice/6.png",
+    "img/icon.png",
     "img/icon.svg",
     "img/plus.svg",
 

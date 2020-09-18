@@ -21,7 +21,7 @@ class Player {
 document.title = app.text.browserTitle;
 if (app.playerList.length == 0)
     for(let i=0;i<3;i++) //add players to addPlayerList
-        app.playerList.push(new Player());//new Player
+        app.playerList.push(new Player(i));//new Player
 
 //preload images
 var dice = []
@@ -40,13 +40,22 @@ if (document.addEventListener){ // TODO: if webapp ignore and go (stay?) fullscr
     document.addEventListener('webkitfullscreenchange', exitHandler, false);
 }function exitHandler(){
     if (!document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement){
-        app.text.alcoholWarning = app.text.continueGame;
-        app.show.alcoholWarning = true;
-        app.show.turnWarning = true;
+        app.overlayWarnings.push({
+            text: app.text.continueGame,
+            yes: function() {
+                    if (app.overlayWarnings.indexOf(this) > -1)
+                        app.overlayWarnings.splice(app.overlayWarnings.indexOf(this), 1)
+                        location.reload();
+                },
+            no: function() {
+                    if (app.overlayWarnings.indexOf(this) > -1)
+                        app.overlayWarnings.splice(app.overlayWarnings.indexOf(this), 1)
+                }
+        });
     }
 }
         
-//app.show.alcoholWarning = false; app.show.turnWarning = false;  //enable for debugging // TODO disable
+app.show.alcoholWarning = false; app.show.turnWarning = false;  //enable for debugging // TODO disable
 
 //service worker
 if ("serviceWorker" in navigator){
@@ -56,14 +65,20 @@ if ("serviceWorker" in navigator){
     const swListener = new BroadcastChannel("swListener");
     swListener.onmessage = function(e) {
         if(e.data == "update") //alert on update
-            app.slideUpInfoYes = function() {
-                app.show.slideUpInfo = false;
-                location.reload();
-            }
-            app.slideUpInfoNo = function() {
-                app.show.slideUpInfo = false;
-            }
-            app.text.slideUpInfo = app.text.update;
-            app.show.slideUpInfo = true;
+            app.slideUpInfos.push({
+                text: app.text.update,
+                yes: function() {
+                        if (app.slideUpInfos.indexOf(this) > -1)
+                            app.slideUpInfos.splice(app.slideUpInfos.indexOf(this), 1)
+                            location.reload();
+                    },
+                no: function() {
+                        if (app.slideUpInfos.indexOf(this) > -1)
+                            app.slideUpInfos.splice(app.slideUpInfos.indexOf(this), 1)
+                    }
+            });
     };
 }
+
+//install
+window.addEventListener('beforeinstallprompt', console.log("install prompt"));

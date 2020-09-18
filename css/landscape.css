@@ -7,6 +7,9 @@
         width: calc(99vw - 6px);
         background-color: #222;
     }
+    .portrait{
+        display: none;
+    }
     #gameBoardOuter{
         width: calc(99vw - 6px);
         overflow-x: scroll;
@@ -62,19 +65,18 @@
         position: relative;
     }
     #gameContent{
+        width: calc(99vw - 6px);
+        height: 55vh;
     }
     #gameTextOuter{
         height: 56vh;
-        width: 66vw;
-        flex-grow: 3;
         display: inline-block;
+        width: 65vw;
     }
     #playerName{
         font-size: 10vh;
-        position: relative;
         background-color: #222;
-        left: -5vw;
-        padding: 5vh 5vw 0vh 8vw;
+        padding: 5vh 5vw 0vh 2vw;
         white-space: pre-line;
     }
     #dice{
@@ -90,43 +92,42 @@
     #gameText{
         font-size: 5vh;
         max-height: 26vh;
-        position: relative;
         background-color: #222;
-        left: -5vw;
-        padding: 4vh 5vw 2vh 8vw;
+        padding: 4vh 5vw 2vh 2vw;
         white-space: pre-line;
-    } 
+    }
     #gameButtons{
-        height: 56vh;
+        height: 50vh;
         width: 30vw;
-        flex-grow: 1;
-        display: inline-block;
+        display: inline-flex;
         flex-direction: column;
-        justify-content: center;
+        float: right;
+        margin: 0 2vw 0 0;
+        padding: 2vh 0;
     }
     .gameButton{
-        margin: 3vh 0;
+        margin: 1vh 0;
         background-color: #131313;
-        padding: 4vh;
-        font-size: 4vh;
+        font-size: 5vh;
         border-radius: 3vh;
         border: 1vh solid #444;
-        text-align: center;
         white-space: pre-line;
-        width: -moz-available;
-        width: -webkit-fill-available;
+        height: -moz-available;          /* WebKit-based browsers will ignore this. */
+        height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     .slideUpInfo{
-        height: 33vh;
         width: calc(40vh + 40vw);
         bottom: -2vw;
-        padding-top: 3vh;
+        padding: 3vh 2vw 4vh 2vw;
         border-radius: 2vw;
         font-size: calc(2.5vh + 1.5vw);
         left: calc(50vw - 20vh - 20vw);
         border: 1vh solid #666;
     }
     .slideUp-enter, .slideUp-leave-to {
-        bottom: -40vh;
+        bottom: -100vh;
     }
 }

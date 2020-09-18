@@ -4,9 +4,10 @@
 - Optional good/bad luck fields (player can choose to use them)
 - Luck variable, bonus/punishment fields
 - if on desktop show qrcode for phone
-- write deploy script?
-- reset save on finish and user can do it?
+- write deploy script for files?
+- reset ~~save on finish~~ and user can do it?
 - after x rounds help last player?
+- popups reusable
 
 # ToDo
 - enable warnings
