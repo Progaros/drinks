@@ -1,8 +1,6 @@
 var data = {
     show: {
-        loadingScreen: true,
-        turnWarning: true,
-        alcoholWarning: true
+        loadingScreen: true
     },
     text: text,
     playerList: [],

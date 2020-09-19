@@ -79,8 +79,8 @@
     .slideUpInfo{
         height: 15vh;
         width: 100vw;
-        bottom: -1vh;
-        padding-top: 3vh;
+        bottom: -2vh;
+        padding: 3vh 0;
         border-radius: 1vh;
         font-size: 5vw;
     }

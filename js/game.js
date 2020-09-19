@@ -111,7 +111,7 @@ var game = {
         },
         {// 7
             action: function() {
-                return "";
+                return "leeres Feld";
             }
         },
         {//8
@@ -121,7 +121,7 @@ var game = {
         },
         {// 9
             action: function() {
-                return "";
+                return "leeres Feld";
             }
         },
         {// 10
@@ -284,7 +284,7 @@ var game = {
         },
         {// 32
             action: function() {
-                return "";
+                return "Verteile so viele Schlucke, wie Spieler anwesend sind";
             }
         },
         {// 33
@@ -294,7 +294,7 @@ var game = {
         },
         {// 34
             action: function() {
-                return "";
+                return "leeres Feld";
             }
         },
         {// 35
@@ -320,7 +320,7 @@ var game = {
         },
         {// 37
             action: function() {
-                return "";
+                return "leeres Feld";
             }
         },
         {// 38
@@ -341,22 +341,22 @@ var game = {
         },
         {// 39
             action: function() {
-                return "";
+                return "leeres Feld";
             }
         },
         {// 40
             action: function() {
-                return "";
+                return "leeres Feld";
             }
         },
         {// 41
             action: function() {
-                return "";
+                return "leeres Feld";
             }
         },
         {// 42
             action: function() {
-                return "";
+                return "leeres Feld";
             }
         },
         {// 43
@@ -380,7 +380,7 @@ var game = {
         },
         {// 45
             action: function() {
-                return "";
+                return "leeres Feld";
             }
         },
         {// 46
@@ -395,7 +395,7 @@ var game = {
         },
         {// 48
             action: function() {
-                return "";
+                return "leeres Feld";
             }
         },
         {// 49
@@ -438,7 +438,7 @@ var game = {
         },
         {// 51
             action: function() {
-                return "";
+                return "leeres Feld";
             }
         },
         {// 52
@@ -449,7 +449,7 @@ var game = {
         },
         {// 53
             action: function() {
-                return "";
+                return "leeres Feld";
             }
         },
         {// 54
@@ -487,7 +487,7 @@ var game = {
         },
         {// 58
             action: function() {
-                return "";
+                return "leeres Feld";
             }
         },
         {// 59
@@ -531,7 +531,7 @@ var game = {
         },
         {// 63
             action: function() {
-                return "";
+                return "leeres Feld";
             }
         },
         {// 64
@@ -574,12 +574,12 @@ var game = {
         },
         {// 67
             action: function() {
-                return "";
+                return "leeres Feld";
             }
         },
         {// 68
             action: function() {
-                return "";
+                return "leeres Feld";
             }
         },
         {// 69
@@ -610,7 +610,7 @@ var game = {
         },
         {// 72
             action: function() {
-                return "";
+                return "leeres Feld";
             }
         },
         {// 73
@@ -662,12 +662,12 @@ var game = {
         },
         {// 78
             action: function() {
-                return "";
+                return "leeres Feld";
             }
         },
         {// 79
             action: function() {
-                return "";
+                return "leeres Feld";
             }
         },
         {// 80
@@ -703,7 +703,7 @@ var game = {
         },
         {// 85
             action: function() {
-                return "";
+                return "leeres Feld";
             }
         },
         {// 86
@@ -726,12 +726,12 @@ var game = {
         },
         {// 88
             action: function() {
-                return "";
+                return "leeres Feld";
             }
         },
         {// 89
             action: function() {
-                return "";
+                return "leeres Feld";
             }
         },
         {// 90
@@ -741,17 +741,17 @@ var game = {
         },
         {// 91
             action: function() {
-                return "";
+                return "leeres Feld";
             }
         },
         {// 92
             action: function() {
-                return "";
+                return "leeres Feld";
             }
         },
         {// 93
             action: function() {
-                return "";
+                return "leeres Feld";
             }
         },
         {// 94

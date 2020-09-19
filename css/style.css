@@ -41,6 +41,7 @@ a {
     background-color: #444;
     margin: 5vh 15vw;
     text-align: inherit;
+    white-space: pre-line;
 }
 .overlayWarnigButtons{
     display: flex;

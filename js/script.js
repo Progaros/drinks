@@ -21,7 +21,7 @@ class Player {
 document.title = app.text.browserTitle;
 if (app.playerList.length == 0)
     for(let i=0;i<3;i++) //add players to addPlayerList
-        app.playerList.push(new Player(i));//new Player
+        app.playerList.push(new Player());//new Player
 
 //preload images
 var dice = []
@@ -40,12 +40,13 @@ if (document.addEventListener){ // TODO: if webapp ignore and go (stay?) fullscr
     document.addEventListener('webkitfullscreenchange', exitHandler, false);
 }function exitHandler(){
     if (!document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement){
+        console.log("exit");
         app.overlayWarnings.push({
             text: app.text.continueGame,
             yes: function() {
                     if (app.overlayWarnings.indexOf(this) > -1)
                         app.overlayWarnings.splice(app.overlayWarnings.indexOf(this), 1)
-                        location.reload();
+                        app.exitGame();
                 },
             no: function() {
                     if (app.overlayWarnings.indexOf(this) > -1)
@@ -55,7 +56,20 @@ if (document.addEventListener){ // TODO: if webapp ignore and go (stay?) fullscr
     }
 }
         
-app.show.alcoholWarning = false; app.show.turnWarning = false;  //enable for debugging // TODO disable
+//disable for debugging // TODO enable
+app.overlayWarnings.push(
+    {
+        text: this.text.startGame,
+        yes: function() {
+                app.overlayWarnings.splice(0, 1);
+                app.requestFullscreen();
+            },
+        no: function() {
+                app.overlayWarnings.splice(0, 1);
+                app.exitGame();
+            }
+    }
+);
 
 //service worker
 if ("serviceWorker" in navigator){
@@ -68,13 +82,11 @@ if ("serviceWorker" in navigator){
             app.slideUpInfos.push({
                 text: app.text.update,
                 yes: function() {
-                        if (app.slideUpInfos.indexOf(this) > -1)
-                            app.slideUpInfos.splice(app.slideUpInfos.indexOf(this), 1)
+                            app.slideUpInfos.splice(0, 1);
                             location.reload();
                     },
                 no: function() {
-                        if (app.slideUpInfos.indexOf(this) > -1)
-                            app.slideUpInfos.splice(app.slideUpInfos.indexOf(this), 1)
+                        app.slideUpInfos.splice(0, 1);
                     }
             });
     };
