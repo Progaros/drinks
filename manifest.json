@@ -2,7 +2,7 @@
     "name": "Drinks!",
     "short_name": "Drinks!",
     "icons": [{
-      "src": "img/icon.svg",
+      "src": "img/icon.png",
         "sizes": "512x512",
         "type": "image/png"
       }],

@@ -8,7 +8,13 @@ var text = {
     manual: "<b>Testversion:</b> Verbesserungsvorschläge bitte an <a href='mailto:oliver.grosskloss+trinken@gmail.com' style='color: #4e88df; text-decoration: underline;'>diese</a> Adresse\n"+
             "\n"+
             "Drehe das Handy ins Querformat, um das Spiel zu starten.\n"+
-            "Drehe es zurück, um Spieler zu bearbeiten oder hinzuzufügen.",
+            "Drehe es zurück, um Spieler zu bearbeiten oder hinzuzufügen.\n"+
+            "\n"+
+            "Zum Zurücksetzen lade die Seite neu\n"+
+            "\n"+
+            "Dein Spielstand wird regelmäßig gespeichert\n"+
+            "\n"+
+            "Du kannst neue Spieler ",
     startGame: "Alkohol ist schädlich. "+
                 "Mit dem Fortfahren bestätigt ihr für alle eventuellen Konsequenzen selbst verantwortlich zu sein.\n"+
                 "Spiel beginnen?",

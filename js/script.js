@@ -17,6 +17,10 @@ class Player {
     }
 };
 
+function isWebApp() {
+    return (window.matchMedia('(display-mode: standalone)').matches);
+}
+
 //setup
 document.title = app.text.browserTitle;
 if (app.playerList.length == 0)
@@ -32,16 +36,33 @@ for(let i=1;i<=6;i++) {
     dice[i] = url;
 }
 
-//return to fullscreen
-if (document.addEventListener){ // TODO: if webapp ignore and go (stay?) fullscreen
-    document.addEventListener('fullscreenchange', exitHandler, false);
-    document.addEventListener('mozfullscreenchange', exitHandler, false);
-    document.addEventListener('MSFullscreenChange', exitHandler, false);
-    document.addEventListener('webkitfullscreenchange', exitHandler, false);
-}function exitHandler(){
-    if (!document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement){
-        app.overlayWarnings.push({
-            text: app.text.continueGame,
+
+if (!isWebApp()){
+    if (document.addEventListener){//return to fullscreen
+        document.addEventListener('fullscreenchange', exitHandler, false);
+        document.addEventListener('mozfullscreenchange', exitHandler, false);
+        document.addEventListener('MSFullscreenChange', exitHandler, false);
+        document.addEventListener('webkitfullscreenchange', exitHandler, false);
+    }function exitHandler(){
+        if (!document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement){
+            app.overlayWarnings.push({
+                text: app.text.continueGame,
+                yes: function() {
+                        app.overlayWarnings.splice(0, 1);
+                        app.requestFullscreen();
+                    },
+                no: function() {
+                        app.overlayWarnings.splice(0, 1);
+                        app.exitGame();
+                    }
+            });
+        }
+    }
+        
+    //disable for debugging
+    app.overlayWarnings.push(
+        {
+            text: this.text.startGame,
             yes: function() {
                     app.overlayWarnings.splice(0, 1);
                     app.requestFullscreen();
@@ -50,24 +71,9 @@ if (document.addEventListener){ // TODO: if webapp ignore and go (stay?) fullscr
                     app.overlayWarnings.splice(0, 1);
                     app.exitGame();
                 }
-        });
-    }
+        }
+    );
 }
-        
-//disable for debugging // TODO enable
-app.overlayWarnings.push(
-    {
-        text: this.text.startGame,
-        yes: function() {
-                app.overlayWarnings.splice(0, 1);
-                app.requestFullscreen();
-            },
-        no: function() {
-                app.overlayWarnings.splice(0, 1);
-                app.exitGame();
-            }
-    }
-);
 
 //service worker
 if ("serviceWorker" in navigator){
@@ -91,4 +97,4 @@ if ("serviceWorker" in navigator){
 }
 
 //install
-window.addEventListener('beforeinstallprompt', console.log("install prompt"));
+//window.addEventListener('beforeinstallprompt', console.log("install prompt"));

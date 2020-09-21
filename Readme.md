@@ -1,5 +1,4 @@
 # Features
-- PC and Mobile
 - Event fields
 - Optional good/bad luck fields (player can choose to use them)
 - if on desktop show qrcode for phone
@@ -16,9 +15,6 @@
 - alcohol warning text
 - manual text (+turn icons?)
   - luck distribution: https://olli.info/trinkspiel/luck.html
-  - to reset game reload page
-  - possibility to add players while playing
-- delete watch.js?
 - meta name description
 
 # ERROR

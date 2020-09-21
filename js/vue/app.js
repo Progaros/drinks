@@ -39,6 +39,5 @@ var app = new Vue({
     components: {
         addPlayersListItem: addPlayersListItem,
         gameField: gameField
-    },
-    watch: watch
+    }
 });

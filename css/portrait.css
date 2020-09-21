@@ -6,6 +6,7 @@
         position: absolute;
         top: 0;
         width: 100vw;
+        overflow: scroll;
     }
     .landscape {
         display: none;

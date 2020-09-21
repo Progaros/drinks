@@ -28,7 +28,6 @@ const precacheResources = [
     "js/vue/data.js",
     "js/vue/methods.js",
     "js/vue/text.js",
-    "js/vue/watch.js",
     "js/confetti.min.js",
     "js/game.js",
     "js/script.js",
