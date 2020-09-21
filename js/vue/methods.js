@@ -72,8 +72,10 @@ var methods = {
         else
             return this.text.pleaseAddPlayers;
     },
-    scrollToPlayer: function() {
-        document.getElementById("gameField"+app.players[0].position)
+    scrollToPlayer: function(player) {
+        if (player == undefined)
+            player = 0;
+        document.getElementById("gameField"+app.players[player].position)
         .scrollIntoView({
             behavior: 'smooth',
             block: 'center',

@@ -111,7 +111,7 @@ var game = {
         },
         {// 7
             action: function() {
-                return "leeres Feld";
+                return "Jeder, der meint nicht betrunken zu sein, trinkt";
             }
         },
         {//8
@@ -121,8 +121,22 @@ var game = {
         },
         {// 9
             action: function() {
-                return "leeres Feld";
-            }
+                app.game.buttons =  [
+                    {action: ()=>{
+                        app.players[0].position += 10;
+                        app.scrollToPlayer();
+                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        app.game.text = "Deine Entscheidung...";
+                    },text: "10 Felder"},
+                    {action: ()=>{
+                        app.players[0].changeLuck(0.3);
+                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        app.game.text = "Deine Entscheidung...";
+                    }, text: "Glück"}
+                ];
+                return "Wähle: Gehe jetzt 10 Felder vor oder du hast für das gesammte Spiel mehr Glück beim Würfeln";
+            },
+            customButtons: true
         },
         {// 10
             action: function() {
@@ -252,7 +266,7 @@ var game = {
         {// 28
             action: function() {
                 app.game.buttons = [{action: async ()=>{
-                        app.game.text = "Trinke " + (Math.floor(await game.rollDiceAnimation(app.players[0].luck)/2));
+                        app.game.text = "Trinke " + (Math.ceil(await game.rollDiceAnimation(app.players[0].luck)/2));
                         app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
                     },text: app.text.rollDice}];
                 return "Würfel nochmal. Trinke die halbe Augenzahl";
@@ -294,14 +308,14 @@ var game = {
         },
         {// 34
             action: function() {
-                return "leeres Feld";
+                return "Trinke 2, wenn es noch vor Mitternacht ist";
             }
         },
         {// 35
             action: function() {
                 app.game.buttons =  [{action: ()=>{
                         app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
-                        app.game.text = "Du trinst 3";
+                        app.game.text = "Du trinkst 3";
                     }, text: "Ich hab durst"},
                     {action: ()=>{
                         app.players[0].position -= 6;
@@ -320,7 +334,7 @@ var game = {
         },
         {// 37
             action: function() {
-                return "leeres Feld";
+                return "Alle wählen den nüchternsten Spieler, der muss exen";
             }
         },
         {// 38
@@ -341,32 +355,35 @@ var game = {
         },
         {// 39
             action: function() {
-                return "leeres Feld";
+                return "Der Spieler mit dem schwächsten Getränk trinkt.";
             }
         },
         {// 40
             action: function() {
-                return "leeres Feld";
+                return "Trinke für jeden Buchstaben deines Namens (" +
+                app.players[0].name.length + ")";
             }
         },
         {// 41
             action: function() {
-                return "leeres Feld";
+                return "Du und die Person links neben dir nennen ihren Lieblingsfilm. Die anderen stimmen ab. Derjenige mit dem schlechteren Film muss trinken";
             }
         },
         {// 42
             action: function() {
-                return "leeres Feld";
+                return "Dein Gegenüber und du schauen sich in die Augen. Wer zuerst wegschaut, trinkt";
             }
         },
         {// 43
             action: function() {
                 app.game.buttons = [{action: async ()=>{
                         var result = (await game.rollDiceAnimation(app.players[0].luck));
-                        if (result%2 == 0)
-                            app.game.text = app.player[0].name+" trinkt"
-                        else
-                            app.game.text = "Die andern trinken"
+                        if (result%2 == 0){
+                            app.game.text = app.players[0].name+" trinkt"
+                        }
+                        else {
+                            app.game.text = "Die andern trinken";
+                        }
                         app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
                     },text: app.text.rollDice}];
                 return "Würfel. Bei gerader Zahl trinkst du, bei ungerader der Rest";
@@ -380,7 +397,7 @@ var game = {
         },
         {// 45
             action: function() {
-                return "leeres Feld";
+                return "Trinke, wenn du ein Appleprodukt besitzt";
             }
         },
         {// 46
@@ -395,7 +412,7 @@ var game = {
         },
         {// 48
             action: function() {
-                return "leeres Feld";
+                return "Bewege dich nicht, bis du das nächste Mal dran bist";
             }
         },
         {// 49
@@ -438,7 +455,7 @@ var game = {
         },
         {// 51
             action: function() {
-                return "leeres Feld";
+                return "Du sagst etwas wie <i>\"Derjenige, der als erstes ... machen würde\"</i>. Alle zeigen mit geschlossenen Augen auf die Person, auf die es am ehesten zutrifft. Derjenige mit den meisten Stimmen muss trinken";
             }
         },
         {// 52
@@ -449,7 +466,7 @@ var game = {
         },
         {// 53
             action: function() {
-                return "leeres Feld";
+                return "Du trinkst doppelt für eine Runde";
             }
         },
         {// 54
@@ -487,7 +504,7 @@ var game = {
         },
         {// 58
             action: function() {
-                return "leeres Feld";
+                return "Trinke mit allen, die du heute erst kennengelernt hast";
             }
         },
         {// 59
@@ -531,7 +548,7 @@ var game = {
         },
         {// 63
             action: function() {
-                return "leeres Feld";
+                return "Die nächste Person, die den Raum verlassen will, muss zuerst austrinken";
             }
         },
         {// 64
@@ -574,12 +591,12 @@ var game = {
         },
         {// 67
             action: function() {
-                return "leeres Feld";
+                return "Du wählst ein verbotenes Wort. Jeder, der es ab jetzt benutzt, muss trinken";
             }
         },
         {// 68
             action: function() {
-                return "leeres Feld";
+                return "Mache 10 Liegestütze. Trinke für jede, die du nicht schaffst";
             }
         },
         {// 69
@@ -594,7 +611,7 @@ var game = {
         },
         {// 70
             action: function() {
-                return "Verteil so viele Schlucke, wie du heute Getränke hattest";
+                return "Verteil so viele Schlucke, wie du heute alkoholische Getränke hattest";
             }
         },
         {// 71
@@ -610,7 +627,7 @@ var game = {
         },
         {// 72
             action: function() {
-                return "leeres Feld";
+                return "Erzähle wo und wann du den Spieler zu deiner Linken getroffen hast";
             }
         },
         {// 73
@@ -657,17 +674,17 @@ var game = {
         },
         {// 77
             action: function() {
-                return "Derjenige, der das vorliest, trinkt";
+                return "Trinke, wenn du du das vorliest";
             }
         },
         {// 78
             action: function() {
-                return "leeres Feld";
+                return "Denke an eine Zahl zwischen 1 und 10. Im Uhrzeigersinn versucht jeder die Zahl zu erraten. Der erste, der richtig liegt, wählt jemanden, der trinken muss.";
             }
         },
         {// 79
             action: function() {
-                return "leeres Feld";
+                return "Spielt einmal \"Ich hab noch nie\"";
             }
         },
         {// 80
@@ -703,7 +720,7 @@ var game = {
         },
         {// 85
             action: function() {
-                return "leeres Feld";
+                return "Du trinkst einmal, dein linker Nachbar 2x, dessen Nachbar 3x, usw. Einmal im Kreis";
             }
         },
         {// 86
@@ -726,12 +743,12 @@ var game = {
         },
         {// 88
             action: function() {
-                return "leeres Feld";
+                return "Mach ein Selfie mit der Person zu deiner Rechten";
             }
         },
         {// 89
             action: function() {
-                return "leeres Feld";
+                return "Die Person, die dir als nächstes in die Augen sieht, trinkt";
             }
         },
         {// 90
@@ -741,17 +758,29 @@ var game = {
         },
         {// 91
             action: function() {
-                return "leeres Feld";
-            }
+                setTimeout(() => {
+                    app.players[0].position = 85;
+                    app.scrollToPlayer();
+                    app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                }, 1000);
+                return "Gehe auf Feld 85 zurück";
+            },
+            customButtons: true
         },
         {// 92
             action: function() {
-                return "leeres Feld";
-            }
+                setTimeout(() => {
+                    app.players[0].position = 80;
+                    app.scrollToPlayer();
+                    app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                }, 1000);
+                return "Gehe auf Feld 80 zurück";
+            },
+            customButtons: true
         },
         {// 93
             action: function() {
-                return "leeres Feld";
+                return "Stell dich auf ein Bein und trinke";
             }
         },
         {// 94
@@ -806,11 +835,13 @@ var game = {
         {// 100
             action: function() {
                 confetti.start();
+                setTimeout(()=>{confetti.stop();}, 5000);
                 app.resetSave();
                 app.game.buttons = [{action: app.resetGame, text: "Nochmal"}];
-                return  "Herzlichen Glückwunsch "+app.players[0].name+",\ndu hast tatsächlich gewonnen!🎉"+
-                        "Wenn es dir gefallen hat, <a href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=F6WZ5B8PS5YU4' style='color: #4691ee; text-decoration: underline;'>"+
-                        "spendiere mir doch auch ein Bier</a>🍺";
+                return  "Herzlichen Glückwunsch "+app.players[0].name+",\n"+
+                        "du hast tatsächlich gewonnen!🎉"+
+                        "Wenn es dir gefallen hat,"+
+                        "<a href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=F6WZ5B8PS5YU4' style='color: #4691ee; text-decoration: underline;'>spendiere mir doch auch ein Bier</a>🍺";
             },
             customButtons: true,
             color: "#b68f0e"

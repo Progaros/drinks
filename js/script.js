@@ -6,14 +6,14 @@ class Player {
         this.luck = 1;
         if(name != undefined)
             this.name = name;
-    }
-    changeLuck(change) {
-        this.luck += change;
-        if (this.luck < 0.5)
-            this.luck = 0.5;
-        else if(this.luck > 2)
-            this.luck = 2;
-        this.luck = Math.round((this.luck)*10)/10;
+        this.changeLuck =  function changeLuck(change) {
+            this.luck += change;    
+            if (this.luck < 0.5)
+                this.luck = 0.5;
+            else if(this.luck > 2)
+                this.luck = 2;
+            this.luck = Math.round((this.luck)*10)/10;
+        }
     }
 };
 
@@ -40,17 +40,15 @@ if (document.addEventListener){ // TODO: if webapp ignore and go (stay?) fullscr
     document.addEventListener('webkitfullscreenchange', exitHandler, false);
 }function exitHandler(){
     if (!document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement){
-        console.log("exit");
         app.overlayWarnings.push({
             text: app.text.continueGame,
             yes: function() {
-                    if (app.overlayWarnings.indexOf(this) > -1)
-                        app.overlayWarnings.splice(app.overlayWarnings.indexOf(this), 1)
-                        app.exitGame();
+                    app.overlayWarnings.splice(0, 1);
+                    app.requestFullscreen();
                 },
             no: function() {
-                    if (app.overlayWarnings.indexOf(this) > -1)
-                        app.overlayWarnings.splice(app.overlayWarnings.indexOf(this), 1)
+                    app.overlayWarnings.splice(0, 1);
+                    app.exitGame();
                 }
         });
     }

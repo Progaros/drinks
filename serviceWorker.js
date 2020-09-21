@@ -1,6 +1,6 @@
 "use strict";
 const swListener = new BroadcastChannel("swListener");
-const cacheName = "cache-v0.3";
+const cacheName = "cache-v1";
 var oldCache = false;
 const precacheResources = [
     "./",

@@ -37,7 +37,7 @@ a {
     align-items: center;
 }
 .overlayWarning{
-    padding: 2em;
+    padding: calc(3vh + 3vw);
     background-color: #444;
     margin: 5vh 15vw;
     text-align: inherit;

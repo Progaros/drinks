@@ -87,6 +87,7 @@
             <div id="gameProgress">
                 <div
                     v-for="(p, index) in players"
+                    @click="app.scrollToPlayer(index);"
                     :key="index"
                     :style="
                         'background-color:'+players[index].color + ';' +
@@ -143,11 +144,10 @@
 
         <div class="overlayWarningOuter" v-for="overlayWarning in overlayWarnings" :key="overlayWarning.text">
             <div class="overlayWarning">
-                <span class="portrait">{{ overlayWarning.text }}</span>
-                <span class="landscape">{{ text.turnPortrait }}</span>
+                <span>{{ overlayWarning.text }}</span>
                 <div class="overlayWarnigButtons">
-                    <div @click="overlayWarning.no" class="portrait warningButton warningNo">{{ text.no }}</div>
-                    <div @click="overlayWarning.yes" class="portrait warningButton warningYes">{{ text.yes }}</div>
+                    <div @click="overlayWarning.no" class="warningButton warningNo">{{ text.no }}</div>
+                    <div @click="overlayWarning.yes" class="warningButton warningYes">{{ text.yes }}</div>
                 </div>
             </div>
         </div>
@@ -161,8 +161,8 @@
 
     </div>
 
-    <!-- <script src="js/vueMin.js"></script> -->
-    <script src="js/vue.js"></script>
+    <script src="js/vueMin.js"></script>
+    <!-- <script src="js/vue.js"></script> -->
     <script src="js/game.js"></script>
     <script src="js/components/addPlayersListItem.js"></script>
     <script src="js/components/gamefield.js"></script>
