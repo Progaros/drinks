@@ -56,6 +56,14 @@
         width: 1.1em;
         margin: 0.3em 0;
     }
+    .resetButton{
+        background-color: #ccc;
+        padding: 0.15em;
+        border-radius: 50%;
+        width: 1.4em;
+        margin: 0.3em 0;
+        float: right;
+    }
     #manual{
         width: 60%;
         margin: 1vh auto 3em auto;

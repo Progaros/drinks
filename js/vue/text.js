@@ -10,11 +10,7 @@ var text = {
             "Drehe das Handy ins Querformat, um das Spiel zu starten.\n"+
             "Drehe es zurück, um Spieler zu bearbeiten oder hinzuzufügen.\n"+
             "\n"+
-            "Zum Zurücksetzen lade die Seite neu\n"+
-            "\n"+
-            "Dein Spielstand wird regelmäßig gespeichert\n"+
-            "\n"+
-            "Du kannst neue Spieler ",
+            "Dein Spielstand wird regelmäßig gespeichert",
     startGame: "Alkohol ist schädlich. "+
                 "Mit dem Fortfahren bestätigt ihr für alle eventuellen Konsequenzen selbst verantwortlich zu sein.\n"+
                 "Spiel beginnen?",

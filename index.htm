@@ -73,7 +73,10 @@
                         v-on:next-players-list-item="nextPlayersListItem">
                     </add-players-list-item>
                 </div>
-                <img @click="addPlayersListItem()" src="img/plus.svg" alt="+" class="addPlayersListButton">
+                <div>
+                    <img @click="addPlayersListItem()" src="img/plus.svg" alt="+" class="addPlayersListButton">
+                    <img @click="reset" src="img/reset.svg" alt="⟲" class="resetButton">
+                </div>
             </div>
             <div id="manual" v-html="text.manual"></div>
             <footer>
