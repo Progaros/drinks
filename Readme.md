@@ -1,3 +1,5 @@
+# STILL IN BETA
+
 # Features
 - Event fields
 - if on desktop show qrcode for phone
