@@ -49,7 +49,7 @@ var methods = {
                 block: 'end',
         });
     },
-    reset: function(){
+    resetPlayers: function(){
         app.playerList = [];
         for(let i=0;i<3;i++) //add players to addPlayerList
             app.playerList.push(new Player());//new Player

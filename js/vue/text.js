@@ -23,7 +23,7 @@ var text = {
     rollDice: "Würfeln",
     pressRollDice: "Drücke auf Würfeln",
     nextPlayer: "Zug beenden",
-    pleaseAddPlayers: "Bitte mindestens\n2 Spieler hinzufügen",
+    pleaseAddPlayers: "Bitte mindestens\n2 Spieler hinzufügen.\nDrehe dafür dein Handy hochkant",
     restoreProgress: "Speicherstand gefunden. Möchtest du das alte Spiel laden?",
     update: "Update gefunden. Jetzt laden?",
     slideUpInfo: ""

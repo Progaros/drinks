@@ -1,13 +1,11 @@
 # Features
 - Event fields
-- Optional good/bad luck fields (player can choose to use them)
 - if on desktop show qrcode for phone
 - write deploy script for files?
-- reset ~~save on finish~~ and user can do it?
 - after x rounds help last player?
 
 # ToDo
-- enable warnings
+- enable alcohol warning
 - use VueMin
 - remove generated players
 

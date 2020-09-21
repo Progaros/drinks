@@ -2,7 +2,9 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#212121">
     <meta name="robots" content="index, nofollow">
     <meta name="googlebot" content="index, nofollow">
@@ -75,7 +77,7 @@
                 </div>
                 <div>
                     <img @click="addPlayersListItem()" src="img/plus.svg" alt="+" class="addPlayersListButton">
-                    <img @click="reset" src="img/reset.svg" alt="⟲" class="resetButton">
+                    <img @click="resetPlayers()" src="img/reset.svg" alt="⟲" class="resetButton">
                 </div>
             </div>
             <div id="manual" v-html="text.manual"></div>

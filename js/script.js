@@ -17,10 +17,6 @@ class Player {
     }
 };
 
-function isWebApp() {
-    return (window.matchMedia('(display-mode: standalone)').matches);
-}
-
 //setup
 document.title = app.text.browserTitle;
 if (app.playerList.length == 0)
@@ -37,7 +33,7 @@ for(let i=1;i<=6;i++) {
 }
 
 
-if (!isWebApp()){
+if (!(window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone == true)){ //no web app
     if (document.addEventListener){//return to fullscreen
         document.addEventListener('fullscreenchange', exitHandler, false);
         document.addEventListener('mozfullscreenchange', exitHandler, false);
@@ -58,7 +54,7 @@ if (!isWebApp()){
             });
         }
     }
-        
+
     //disable for debugging
     app.overlayWarnings.push(
         {

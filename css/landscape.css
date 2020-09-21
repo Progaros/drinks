@@ -76,7 +76,6 @@
     }
     #playerName{
         font-size: 10vh;
-        background-color: #222;
         padding: 5vh 5vw 0vh 2vw;
         white-space: pre-line;
     }
@@ -93,7 +92,6 @@
     #gameText{
         font-size: 5vh;
         max-height: 26vh;
-        background-color: #222;
         padding: 4vh 5vw 2vh 2vw;
         white-space: pre-line;
     }
