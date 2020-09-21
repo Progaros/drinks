@@ -33,7 +33,7 @@ for(let i=1;i<=6;i++) {
 }
 
 
-if (!(window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone == true)){ //no web app
+if (!(window.matchMedia('(display-mode: standalone)').matches || window.matchMedia('(display-mode: fullscreen)').matches || window.navigator.standalone == true)){ //no web app
     if (document.addEventListener){//return to fullscreen
         document.addEventListener('fullscreenchange', exitHandler, false);
         document.addEventListener('mozfullscreenchange', exitHandler, false);

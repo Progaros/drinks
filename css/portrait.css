@@ -1,4 +1,4 @@
-@media (orientation:portrait) {
+@media (max-aspect-ratio: 13/9) {
     #landscape {display: none;}
     #portrait {
         background-color: #222;

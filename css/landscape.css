@@ -1,4 +1,4 @@
-@media (orientation: landscape) {
+@media (min-aspect-ratio: 13/9) {
     #portrait {display: none;}
     #landscape {
         height: 97vh;
