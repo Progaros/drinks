@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color:black;
+            margin:0;
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100vh;
+        }
+        #iframe{
+            width:70vh;
+            height:99vh;
+            margin: 0.5vh auto 0 auto;
+        }
+        button{
+            position: absolute;
+            left: 5px;
+            background-color: #222;
+            border: 3px solid #666;
+            border-radius: 5px;
+            color: #eee;
+        }
+    </style>
+</head>
+<body>
+    <iframe src="./#framed" frameborder="0" id="iframe"></iframe>
+    <button style="top: 5px" onclick="turn()">⟲ Drehen</button>
+    <button style="top: 35px" onclick="fullscreen()">⛶ Vollbild</button>
+    <script>
+        var orientation = "portrait";
+        var iframe = document.getElementById("iframe");
+        function turn(){
+            if (orientation == "portrait"){
+                orientation = "landscape";
+                iframe.style.width = "99.9vw"
+                iframe.style.height = "50vw"
+                iframe.style.maxHeight = "90vh";
+            }
+            else {
+                orientation = "portrait";
+                iframe.style.width = "70vh"
+                iframe.style.height = "99.9vh"
+            }
+        }
+        iframe.onload = function() {
+           var iframeTitle = iframe.contentDocument.title;
+           document.title = iframeTitle;
+        }
+        function fullscreen(){
+            if (!document.fullscreenElement &&    // alternative standard method
+                !document.mozFullScreenElement && !document.webkitFullscreenElement) {  // current working methods
+                if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+                } else if (document.documentElement.mozRequestFullScreen) {
+                document.documentElement.mozRequestFullScreen();
+                } else if (document.documentElement.webkitRequestFullscreen) {
+                document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+                }
+            } else {
+                if (document.cancelFullScreen) {
+                    document.cancelFullScreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.webkitCancelFullScreen) {
+                    document.webkitCancelFullScreen();
+                }
+            }
+        }
+    </script>
+</body>
+</html>

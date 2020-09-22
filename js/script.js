@@ -32,8 +32,18 @@ for(let i=1;i<=6;i++) {
     dice[i] = url;
 }
 
+function isWebApp(){
+    return (window.matchMedia('(display-mode: standalone)').matches || window.matchMedia('(display-mode: fullscreen)').matches || window.navigator.standalone == true);
+}
 
-if (!(window.matchMedia('(display-mode: standalone)').matches || window.matchMedia('(display-mode: fullscreen)').matches || window.navigator.standalone == true)){ //no web app
+function isTouch(){
+    return 'ontouchstart' in window;
+}
+
+if (!isTouch() && location.hash.length == 0)
+    window.location.replace("./desktop.htm");
+
+if (!isWebApp() && isTouch()){ //no web app & touch browser
     if (document.addEventListener){//return to fullscreen
         document.addEventListener('fullscreenchange', exitHandler, false);
         document.addEventListener('mozfullscreenchange', exitHandler, false);
