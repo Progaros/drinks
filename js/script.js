@@ -64,22 +64,23 @@ if (!isWebApp() && isTouch()){ //no web app & touch browser
             });
         }
     }
-
-    //disable for debugging
-    app.overlayWarnings.push(
-        {
-            text: this.text.startGame,
-            yes: function() {
-                    app.overlayWarnings.splice(0, 1);
-                    app.requestFullscreen();
-                },
-            no: function() {
-                    app.overlayWarnings.splice(0, 1);
-                    app.exitGame();
-                }
-        }
-    );
 }
+
+//disable for debugging
+app.overlayWarnings.push(
+    {
+        text: this.text.startGame,
+        yes: function() {
+                app.overlayWarnings.splice(0, 1);
+                if (isTouch())
+                app.requestFullscreen();
+            },
+        no: function() {
+                app.overlayWarnings.splice(0, 1);
+                app.exitGame();
+            }
+    }
+);
 
 //service worker
 if ("serviceWorker" in navigator){
