@@ -371,7 +371,7 @@ var game = {
         },
         {// 42
             action: function() {
-                return "Dein Gegenüber und du schauen sich in die Augen. Wer zuerst wegschaut, trinkt";
+                return "Dein Gegenüber und du schauen sich in die Augen. Wer zuerst lacht, trinkt";
             }
         },
         {// 43
@@ -407,7 +407,7 @@ var game = {
         },
         {// 47
             action: function() {
-                return "Die Person links von der Person, die diese Regel liest, trinkt 2";
+                return "Die Person links von der Person, die diese Regel vorliest, trinkt 2";
             }
         },
         {// 48
