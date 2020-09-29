@@ -90,7 +90,7 @@ var game = {
                     app.scrollToPlayer();
                     app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
                 }, 1000);
-                return "Du gehts auf Feld 21";
+                return "Du gehst auf Feld 21";
             },
             customButtons: true
         },
@@ -182,7 +182,7 @@ var game = {
         },
         {// 16
             action: function() {
-                return "Alle Singels trinken";
+                return "Alle Singles trinken";
             }
         },
         {// 17

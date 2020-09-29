@@ -73,6 +73,11 @@
                 }
             }
         }
+        window.document.addEventListener('exit', exit, false)
+        function exit() {
+            window.history.go(-2);
+            window.history.go(-1);
+        }
     </script>
 </body>
 </html>

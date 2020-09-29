@@ -76,7 +76,6 @@ app.overlayWarnings.push(
                 app.requestFullscreen();
             },
         no: function() {
-                app.overlayWarnings.splice(0, 1);
                 app.exitGame();
             }
     }

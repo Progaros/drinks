@@ -26,7 +26,13 @@ var methods = {
         this.requestFullscreen();
     },
     exitGame: function() {
-        window.history.back();
+        if (isWebApp()){
+            window.close();
+        }
+        else if (!isTouch())
+            window.parent.document.dispatchEvent(new CustomEvent('exit'));
+        else
+            window.history.back();
     },
     saveGame: function(){
         localStorage.setItem('playerList', JSON.stringify(this.playerList));
