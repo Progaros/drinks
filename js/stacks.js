@@ -273,7 +273,7 @@ var stacks = [
             function(){ return "Du und die Person " + rl() + "s neben dir nennen ihren Lieblingsfilm. Die anderen stimmen ab. Derjenige mit dem schlechteren Film muss trinken" },
             function(){ return "Alle nennen nacheinander Cocktailnamen. Die Person, der nichts mehr einfällt, oder etwas wiederholt, trinkt 2 Schlucke. Du beginnst" },
             function(){ return "Du wählst ein verbotenes Wort. Jeder, der es ab jetzt benutzt, muss trinken" },
-            function(){ return "Trinke, wenn du schon einmal Striptease gemacht hast" },
+            function(){ return "Trinke, wenn du schon einmal einen Striptease gemacht hast" },
             function(){ return "Trinke, wenn du schon einmal eine Unterschrift gefälscht hast" },
             function(){ return "Zeige das letzte Foto, das du auf deinem Handy aufgenommen hast" },
             function(){ return "Trinke, wenn du noch nie Blut gespendet hast" },

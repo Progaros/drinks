@@ -100,7 +100,7 @@
             <div id="gameProgress">
                 <div
                     v-for="(p, index) in players"
-                    @click="app.scrollToPlayer(index);"
+                    @click="scrollToPlayer(index);"
                     :key="index"
                     :style="
                         'background-color:'+players[index].color + ';' +

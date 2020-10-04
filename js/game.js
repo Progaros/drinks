@@ -289,7 +289,7 @@ var game = {
         },
         {// 25
             action: function() {
-                return "Nichts. Hier passiert einfach gar nichts";
+                return app.drawCard()();
             }
         },
         {// 26
