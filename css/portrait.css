@@ -24,6 +24,8 @@
         max-height: calc(50vh - 2.3em);
         overflow-x: hidden;
         overflow-y: scroll;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
     }
     #addPlayersList::-webkit-scrollbar {
         display: none;
