@@ -21,6 +21,15 @@ var app = new Vue({
                                             localStorage.removeItem('playerList');
                                         }
                                     }
+                                    if (localStorage.getItem("currentStack")) {
+                                        try {
+                                            app.currentStack = JSON.parse(localStorage.getItem('currentStack'));
+                                        } catch(e) {
+                                            alert("an error occured");
+                                            console.error(e);
+                                            localStorage.removeItem('currentStack');
+                                        }
+                                    }
                                 },
                             no: function() {
                                     app.slideUpInfos.splice(0, 1);

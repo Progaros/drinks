@@ -44,10 +44,12 @@ var methods = {
     },
     saveGame: function(){
         localStorage.setItem('playerList', JSON.stringify(this.playerList));
+        localStorage.setItem('currentStack', JSON.stringify(this.currentStack));
         localStorage.setItem('lastTime', JSON.stringify(Date.now()));
     },
     resetSave: function(){
         localStorage.removeItem('playerList');
+        localStorage.removeItem('currentStack');
     },
     resetGame: function(){
         confetti.stop();
