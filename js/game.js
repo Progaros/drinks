@@ -57,6 +57,15 @@ var game = {
         app.game.buttons = [{action: game.rollDice, text: app.text.rollDice}];
         app.game.text = app.text.pressRollDice;
     },
+    penaltyLog: {},
+    checkPenaltyLog: function(field){
+        if(this.penaltyLog["field"+field] == undefined)
+            this.penaltyLog["field"+field] = [];
+        this.penaltyLog["field"+field].push(app.players[0].name);
+        if (this.penaltyLog["field"+field].filter(x => x==app.players[0].name).length < 3)
+            return true;
+        return false;
+    },
     fields: [{},
         {// 1
             action: function() {
@@ -215,13 +224,16 @@ var game = {
         },
         {// 18
             action: function() {
-                app.game.buttons = [{action: async ()=>{
+                if (game.checkPenaltyLog(18)){
+                    app.game.buttons = [{action: async ()=>{
                         app.game.text = "Trinke " + await game.rollDiceAnimation(app.players[0].luck);
                         app.players[0].position = 0;
                         app.scrollToPlayer();
                         app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
                     },text: app.text.rollDice}];
-                return "Würfel nochmal. Trink so viel wie du Augen gewürfelt hast und gehe auf START";
+                    return "Würfel nochmal. Trink so viel wie du Augen gewürfelt hast und gehe auf START";
+                } else
+                return "Diesmal musst du nicht zurück";
             },
             customButtons: true
         },
@@ -289,12 +301,15 @@ var game = {
         },
         {// 27
             action: function() {
-                setTimeout(() => {
-                    app.players[0].position -= 10;
-                    app.scrollToPlayer();
-                    app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
-                }, 1500);
-                return "Gehe 10 Felder zurück";
+                if (game.checkPenaltyLog(27)){
+                    setTimeout(() => {
+                        app.players[0].position -= 10;
+                        app.scrollToPlayer();
+                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                    }, 1500);
+                    return "Gehe 10 Felder zurück";
+                } else
+                return "Diesmal musst du nicht zurück";
             },
             customButtons: true
         },
@@ -451,12 +466,15 @@ var game = {
         },
         {// 49
             action: function() {
-                setTimeout(() => {
-                    app.players[0].position = 36;
-                    app.scrollToPlayer();
-                    app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
-                }, 1000);
-                return "Du gehst auf Feld 36";
+                if (game.checkPenaltyLog(49)){
+                    setTimeout(() => {
+                        app.players[0].position = 36;
+                        app.scrollToPlayer();
+                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                    }, 1000);
+                    return "Du gehst auf Feld 36";
+                } else
+                return "Diesmal musst du nicht zurück";
             },
             customButtons: true
         },
@@ -650,12 +668,15 @@ var game = {
         },
         {// 71
             action: function() {
-                setTimeout(() => {
-                    app.players[0].position = 50;
-                    app.scrollToPlayer();
-                    app.game.buttons = [{action: game.rollDice, text: app.text.rollDice}];
-                }, 1000);
-                return "Gehe auf das Feld 50 und Würfel noch einmal";
+                if (game.checkPenaltyLog(71)){
+                    setTimeout(() => {
+                        app.players[0].position = 50;
+                        app.scrollToPlayer();
+                        app.game.buttons = [{action: game.rollDice, text: app.text.rollDice}];
+                    }, 1000);
+                    return "Gehe auf das Feld 50 und Würfel noch einmal";
+                } else
+                return "Diesmal musst du nicht zurück";
             },
             customButtons: true
         },
@@ -742,12 +763,15 @@ var game = {
         },
         {// 81
             action: function() {
-                setTimeout(() => {
-                    app.players[0].position = 69;
-                    app.scrollToPlayer();
-                    app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
-                }, 1000);
-                return "Gehe auf Feld 69 zurück";
+                if (game.checkPenaltyLog(81)){
+                    setTimeout(() => {
+                        app.players[0].position = 69;
+                        app.scrollToPlayer();
+                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                    }, 1000);
+                    return "Gehe auf Feld 69 zurück";
+                } else
+                return "Diesmal musst du nicht zurück";
             },
             customButtons: true
         },
@@ -778,14 +802,17 @@ var game = {
         },
         {// 87
             action: function() {
-                app.game.buttons = [{action: async ()=>{
-                        var result = (await game.rollDiceAnimation(app.players[0].luck)*2);
-                        app.players[0].position -= result;
-                        app.game.text = "Du gehst "+result+" Felder zurück"
-                        app.scrollToPlayer();
-                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
-                    },text: app.text.rollDice}];
-                return "Würfel. Du gehst die doppelte Augenzahl nach hinten";
+                if (game.checkPenaltyLog(87)){
+                    app.game.buttons = [{action: async ()=>{
+                            var result = (await game.rollDiceAnimation(app.players[0].luck)*2);
+                            app.players[0].position -= result;
+                            app.game.text = "Du gehst "+result+" Felder zurück"
+                            app.scrollToPlayer();
+                            app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        },text: app.text.rollDice}];
+                    return "Würfel. Du gehst die doppelte Augenzahl nach hinten";
+                } else
+                return "Diesmal musst du nicht zurück";
             },
             customButtons: true
         },
@@ -806,23 +833,29 @@ var game = {
         },
         {// 91
             action: function() {
-                setTimeout(() => {
-                    app.players[0].position = 85;
-                    app.scrollToPlayer();
-                    app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
-                }, 1000);
-                return "Gehe auf Feld 85 zurück";
+                if (game.checkPenaltyLog(91)){
+                    setTimeout(() => {
+                        app.players[0].position = 85;
+                        app.scrollToPlayer();
+                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                    }, 1000);
+                    return "Gehe auf Feld 85 zurück";
+                } else
+                return "Diesmal musst du nicht zurück";
             },
             customButtons: true
         },
         {// 92
             action: function() {
-                setTimeout(() => {
-                    app.players[0].position = 80;
-                    app.scrollToPlayer();
-                    app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
-                }, 1000);
-                return "Gehe auf Feld 80 zurück";
+                if (game.checkPenaltyLog(92)){
+                    setTimeout(() => {
+                        app.players[0].position = 80;
+                        app.scrollToPlayer();
+                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                    }, 1000);
+                    return "Gehe auf Feld 80 zurück";
+                } else
+                return "Diesmal musst du nicht zurück";
             },
             customButtons: true
         },
@@ -843,12 +876,15 @@ var game = {
         },
         {// 96
             action: function() {
-                setTimeout(() => {
-                    app.players[0].position = 69;
-                    app.scrollToPlayer();
-                    app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
-                }, 1000);
-                return "Gehe auf Feld 69 zurück";
+                if (game.checkPenaltyLog(96)){
+                    setTimeout(() => {
+                        app.players[0].position = 69;
+                        app.scrollToPlayer();
+                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                    }, 1000);
+                    return "Gehe auf Feld 69 zurück";
+                } else
+                return "Diesmal musst du nicht zurück";
             },
             customButtons: true
         },
@@ -859,14 +895,17 @@ var game = {
         },
         {// 98
             action: function() {
-                app.game.buttons = [{action: async ()=>{
-                        var result = await game.rollDiceAnimation(app.players[0].luck);
-                        app.players[0].position -= result;
-                        app.game.text = "Du gehst "+result+" Felder zurück"
-                        app.scrollToPlayer();
-                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
-                    },text: app.text.rollDice}];
-                return "Würfel und gehe die Anzahl der Augen zurück";
+                if (game.checkPenaltyLog(98)){
+                    app.game.buttons = [{action: async ()=>{
+                            var result = await game.rollDiceAnimation(app.players[0].luck);
+                            app.players[0].position -= result;
+                            app.game.text = "Du gehst "+result+" Felder zurück"
+                            app.scrollToPlayer();
+                            app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        },text: app.text.rollDice}];
+                    return "Würfel und gehe die Anzahl der Augen zurück";
+                } else
+                return "Diesmal musst du nicht zurück";
             },
             customButtons: true
         },
