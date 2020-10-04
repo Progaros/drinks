@@ -1,6 +1,6 @@
 "use strict";
 const swListener = new BroadcastChannel("swListener");
-const cacheName = "cache-v1.19";
+const cacheName = "cache-v2.0.0";
 var oldCache = false;
 const precacheResources = [
     "./",
@@ -32,6 +32,7 @@ const precacheResources = [
     "js/confetti.min.js",
     "js/game.js",
     "js/script.js",
+    "js/stacks.js",
     "js/vueMin.js"
 ];
 

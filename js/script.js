@@ -21,7 +21,10 @@ class Player {
 document.title = app.text.browserTitle;
 if (app.playerList.length == 0)
     for(let i=0;i<3;i++) //add players to addPlayerList
-        app.playerList.push(new Player());//new Player
+        if(debugging)
+            app.playerList.push(new Player("Spieler"+(i+1)));//new Player
+        else
+            app.playerList.push(new Player());//new Player
 
 //preload images
 var dice = []
@@ -66,20 +69,22 @@ if (!isWebApp() && isTouch()){ //no web app & touch browser
     }
 }
 
-//disable for debugging
-app.overlayWarnings.push(
-    {
-        text: this.text.startGame,
-        yes: function() {
-                app.overlayWarnings.splice(0, 1);
-                if (isTouch())
-                app.requestFullscreen();
-            },
-        no: function() {
-                app.exitGame();
-            }
-    }
-);
+//alcohol warning
+if (!debugging){
+    app.overlayWarnings.push(
+        {
+            text: this.text.startGame,
+            yes: function() {
+                    app.overlayWarnings.splice(0, 1);
+                    if (isTouch())
+                    app.requestFullscreen();
+                },
+            no: function() {
+                    app.exitGame();
+                }
+        }
+    );
+}
 
 //service worker
 if ("serviceWorker" in navigator){

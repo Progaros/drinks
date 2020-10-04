@@ -3,7 +3,7 @@ var app = new Vue({
     data: data,
     mounted() {
         this.show.loadingScreen = false;
-        if (localStorage.getItem("lastTime")) { // show restoreProgress if lastPlayed < 10h
+        if (!debugging && localStorage.getItem("lastTime")) { // show restoreProgress if lastPlayed < 10h
             try {
                 var lastTime = JSON.parse(localStorage.getItem('lastTime'));
                 if ((Date.now()-lastTime)/1000/60/60 < 10)

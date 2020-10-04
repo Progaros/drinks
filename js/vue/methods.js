@@ -1,7 +1,7 @@
 var methods = {
     addPlayersListItem: function() {
         this.playerList.push(new Player);
-        setTimeout(()=>{//wait until input is created
+        setTimeout(()=>{ //wait until input is created
             document.getElementById("addPlayersList").lastElementChild
                 .scrollIntoView({
                     behavior: 'smooth',
@@ -16,9 +16,17 @@ var methods = {
     nextPlayersListItem: function() {
         if (document.activeElement.parentElement.nextElementSibling == null)
             this.addPlayersListItem();
-            setTimeout(()=>{//wait until input is created
+            setTimeout(()=>{ //wait until input is created
                 document.activeElement.parentElement.nextElementSibling.firstElementChild.focus();
             },100);
+    },
+    drawCard: function(){
+        if (this.currentCards.length == 0)
+            this.currentCards.push(...this.stacks.find(
+                    stack => stack.name == this.currentStack //selected
+                ).cards);
+        var randomPosition = Math.floor(Math.random()*this.currentCards.length);
+        return this.currentCards.splice(randomPosition,1)[0];
     },
     startGame: function() {
         this.show.alcoholWarning = false;

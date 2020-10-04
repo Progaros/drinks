@@ -39,9 +39,12 @@ var game = {
                 }, 200);
             });
         return new Promise((resolve) => { // roll again slower
+            var timeout = Math.pow(time,1.5)*7;
+            if (debugging)
+                timeout = 0;
             setTimeout(() => {
                 resolve(game.rollDiceAnimation(luck, time, number));
-            }, Math.pow(time,1.5)*7); //TODO x^2
+            }, timeout);
           });
     },
     nextPlayer: function() {
@@ -64,33 +67,51 @@ var game = {
         },
         {// 2
             action: function() {
-                return "Du und deine beiden Sitznachbarn Trinken";
+                return app.drawCard()();
             }
         },
         {// 3
             action: function() {
-                setTimeout(() => {
-                    app.players[0].position -= 2;
-                    app.scrollToPlayer();
-                    app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
-                }, 1000);
-                return "Gehe 2 Felder zurück";
+                if (Math.random() < 0.5){
+                    setTimeout(() => {
+                        app.players[0].position += 2;
+                        app.scrollToPlayer();
+                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                    }, 1000);
+                    return "Gehe 2 Felder vor";
+                } else {
+                    setTimeout(() => {
+                        app.players[0].position -= 2;
+                        app.scrollToPlayer();
+                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                    }, 1000);
+                    return "Gehe 2 Felder zurück";
+                }
             },
             customButtons: true
         },
         {// 4
             action: function() {
-                return "Ein Spieler deiner Wahl Trinkt";
+                return app.drawCard()();
             }
         },
         {// 5
             action: function() {
-                setTimeout(() => {
-                    app.players[0].position = 21;
-                    app.scrollToPlayer();
-                    app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
-                }, 1000);
-                return "Du gehst auf Feld 21";
+                if (Math.random() < 0.5){
+                    setTimeout(() => {
+                        app.players[0].position = 21;
+                        app.scrollToPlayer();
+                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                    }, 1000);
+                    return "Du gehst auf Feld 21";
+                } else {
+                    setTimeout(() => {
+                        app.players[0].position = 12;
+                        app.scrollToPlayer();
+                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                    }, 1000);
+                    return "Du gehst auf Feld 12";
+                }
             },
             customButtons: true
         },
@@ -105,18 +126,18 @@ var game = {
                         app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
                         app.game.text = "Dann eben nicht";
                     },text: "Brauche ich nicht"}];
-                return "Angebot: Trinke jetzt 5 und du hast für das gesammte Spiel mehr Glück beim Würfeln";
+                return "Angebot: Trinke jetzt 5 und du hast für das gesamte Spiel mehr Glück beim Würfeln";
             },
             customButtons: true
         },
         {// 7
             action: function() {
-                return "Jeder, der meint nicht betrunken zu sein, trinkt";
+                return app.drawCard()();
             }
         },
         {//8
             action: function() {
-                return "Endlich kannst du wieder Trinken";
+                return app.drawCard()();
             }
         },
         {// 9
@@ -134,7 +155,7 @@ var game = {
                         app.game.text = "Deine Entscheidung...";
                     }, text: "Glück"}
                 ];
-                return "Wähle: Gehe jetzt 10 Felder vor oder du hast für das gesammte Spiel mehr Glück beim Würfeln";
+                return "Wähle: Gehe jetzt 10 Felder vor oder du hast für das gesamte Spiel mehr Glück beim Würfeln";
             },
             customButtons: true
         },
@@ -146,22 +167,22 @@ var game = {
         },
         {// 11
             action: function() {
-                return "Alle trinken";
+                return app.drawCard()();
             }
         },
         {// 12
             action: function() {
-                return "Alle Mädls Trinken";
+                return app.drawCard()();
             }
         },
         {// 13
             action: function() {
-                return "Verteile 3 Schlucke an eine Person, oder Trink selbst 1";
+                return app.drawCard()();
             }
         },
         {// 14
             action: function() {
-                return "Alle, die keine Uhr tragen, Trinken";
+                return app.drawCard()();
             }
         },
         {// 15
@@ -182,7 +203,7 @@ var game = {
         },
         {// 16
             action: function() {
-                return "Alle Singles trinken";
+                return app.drawCard()();
             }
         },
         {// 17
@@ -211,12 +232,12 @@ var game = {
                 app.players.forEach(p => {if(p.position > bestScore) bestScore=p.position});
                 app.players.forEach(p => {if(p.position == bestScore) bestPlayer+=p.name+", "});
                 bestPlayer = bestPlayer.substring(0, bestPlayer.length-2);
-                return "Es Trinkt die Person, die dem Ziel am nächsten ist ("+bestPlayer+")";
+                return "Es trinkt die Person, die dem Ziel am nächsten ist ("+bestPlayer+")";
             }
         },
         {// 20
             action: function() {
-                return "Trinke 5 Schlucke, wenn du Alkohol nicht verträgst";
+                return app.drawCard()();
             }
         },
         {// 21
@@ -227,18 +248,32 @@ var game = {
         },
         {// 22
             action: function() {
-                return "Spiele einmal Wahrheit oder Pflicht";
+                return app.drawCard()();
             }
         },
         {// 23
             action: function() {
-                return "Alle Jungs trinken";
+                return app.drawCard()();
             }
         },
         {// 24
             action: function() {
-                return "Die Nächste Person, die trinken muss, verteilt 2 Schlucke";
-            }
+                var random = Math.floor(Math.random()*(app.players.length-1))
+                var player1 = random+1;
+                var player2 = (random+1)%(app.players.length-1)+1;
+                app.game.buttons =  [{action: ()=>{
+                        app.players[player1].changeLuck(0.2);
+                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        app.game.text = app.players[player1].name+" hat jetzt mehr Glück";
+                    }, text: app.players[player1].name},
+                    {action: ()=>{
+                        app.players[player2].changeLuck(0.2);
+                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        app.game.text = app.players[player2].name+" hat jetzt mehr Glück";
+                    },text: app.players[player2].name}];
+                return "Wähle wer ab jetzt mehr Glück beim Würfeln hat";
+            },
+            customButtons: true
         },
         {// 25
             action: function() {
@@ -288,27 +323,27 @@ var game = {
         },
         {// 30
             action: function() {
-                return "Bestimme einen der Trinken soll";
+                return app.drawCard()();
             }
         },
         {// 31
             action: function() {
-                return "Trink so viel wie du Gewürfelt hast";
+                return app.drawCard()();
             }
         },
         {// 32
             action: function() {
-                return "Verteile so viele Schlucke, wie Spieler anwesend sind";
+                return app.drawCard()();
             }
         },
         {// 33
             action: function() {
-                return "Trinke, wenn du Geschwister hast";
+                return app.drawCard()();
             }
         },
         {// 34
             action: function() {
-                return "Trinke 2, wenn es noch vor Mitternacht ist";
+                return app.drawCard()();
             }
         },
         {// 35
@@ -329,12 +364,12 @@ var game = {
         },
         {// 36
             action: function() {
-                return "Endlich kannst DU Trinken";
+                return app.drawCard()();
             }
         },
         {// 37
             action: function() {
-                return "Alle wählen den nüchternsten Spieler, der muss exen";
+                return app.drawCard()();
             }
         },
         {// 38
@@ -343,7 +378,7 @@ var game = {
                     app.players[0].position += 3;
                     app.scrollToPlayer();
                     app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
-                    app.game.text = "Du gehtst 3 Felder vor";
+                    app.game.text = "Du gehst 3 Felder vor";
                 }, text: "VORWÄRTS!"},
                 {action: ()=>{
                     app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
@@ -355,23 +390,22 @@ var game = {
         },
         {// 39
             action: function() {
-                return "Der Spieler mit dem schwächsten Getränk trinkt.";
+                return app.drawCard()();
             }
         },
         {// 40
             action: function() {
-                return "Trinke für jeden Buchstaben deines Namens (" +
-                app.players[0].name.length + ")";
+                return app.drawCard()();
             }
         },
         {// 41
             action: function() {
-                return "Du und die Person links neben dir nennen ihren Lieblingsfilm. Die anderen stimmen ab. Derjenige mit dem schlechteren Film muss trinken";
+                return app.drawCard()();
             }
         },
         {// 42
             action: function() {
-                return "Dein Gegenüber und du schauen sich in die Augen. Wer zuerst lacht, trinkt";
+                return app.drawCard()();
             }
         },
         {// 43
@@ -392,27 +426,27 @@ var game = {
         },
         {// 44
             action: function() {
-                return "Du bist jetzt einmal Daumenmaster. Wenn du irgendwann deinen Daumen an die Tischkante legst, müssen es dir alle gleich tun. Der letzte trinkt 2";
+                return app.drawCard()();
             }
         },
         {// 45
             action: function() {
-                return "Trinke, wenn du ein Appleprodukt besitzt";
+                return app.drawCard()();
             }
         },
         {// 46
             action: function() {
-                return "Du leerst dein Glas bis zur Hälfte";
+                return app.drawCard()();
             }
         },
         {// 47
             action: function() {
-                return "Die Person links von der Person, die diese Regel vorliest, trinkt 2";
+                return app.drawCard()();
             }
         },
         {// 48
             action: function() {
-                return "Bewege dich nicht, bis du das nächste Mal dran bist";
+                return app.drawCard()();
             }
         },
         {// 49
@@ -422,7 +456,7 @@ var game = {
                     app.scrollToPlayer();
                     app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
                 }, 1000);
-                return "Du gehts auf Feld 36";
+                return "Du gehst auf Feld 36";
             },
             customButtons: true
         },
@@ -455,7 +489,7 @@ var game = {
         },
         {// 51
             action: function() {
-                return "Du sagst etwas wie <i>\"Derjenige, der als erstes ... machen würde\"</i>. Alle zeigen mit geschlossenen Augen auf die Person, auf die es am ehesten zutrifft. Derjenige mit den meisten Stimmen muss trinken";
+                return app.drawCard()();
             }
         },
         {// 52
@@ -466,12 +500,12 @@ var game = {
         },
         {// 53
             action: function() {
-                return "Du trinkst doppelt für eine Runde";
+                return app.drawCard()();
             }
         },
         {// 54
             action: function() {
-                return "Trink so viel, wie du gewürfelt hast";
+                return app.drawCard()();
             }
         },
         {// 55
@@ -489,7 +523,7 @@ var game = {
         },
         {// 56
             action: function() {
-                return "Du und die Person, die du hier am längsten kennst, trinken";
+                return app.drawCard()();
             }
         },
         {// 57
@@ -504,7 +538,7 @@ var game = {
         },
         {// 58
             action: function() {
-                return "Trinke mit allen, die du heute erst kennengelernt hast";
+                return app.drawCard()();
             }
         },
         {// 59
@@ -513,13 +547,13 @@ var game = {
                         app.players[0].position += 3;
                         app.scrollToPlayer();
                         app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
-                        app.game.text = "Du gehtst 3 Felder vor";
+                        app.game.text = "Du gehst 3 Felder vor";
                     }, text: "VORWÄRTS!"},
                     {action: ()=>{
                         app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
                         app.game.text = "Du darfst das nächste Mal Trinken überspringen";
                     },text: "Ich hab Zeit..."}];
-                return "Gehe jetzt 3 Felder vor oder überspringe das nächste mal Trinken";
+                return "Gehe jetzt 3 Felder vor oder überspringe das nächste Mal Trinken";
             },
             customButtons: true
         },
@@ -548,14 +582,14 @@ var game = {
         },
         {// 63
             action: function() {
-                return "Die nächste Person, die den Raum verlassen will, muss zuerst austrinken";
+                return app.drawCard()();
             }
         },
         {// 64
             action: function() {
                 app.game.buttons =  [{action: ()=>{
                         app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
-                        app.game.text = "Du trinst 2";
+                        app.game.text = "Du trinkst 2";
                     }, text: "Ich hab durst"},
                     {action: ()=>{
                         app.players[0].position -= 3;
@@ -591,27 +625,27 @@ var game = {
         },
         {// 67
             action: function() {
-                return "Du wählst ein verbotenes Wort. Jeder, der es ab jetzt benutzt, muss trinken";
+                return app.drawCard()();
             }
         },
         {// 68
             action: function() {
-                return "Mache 10 Liegestütze. Trinke für jede, die du nicht schaffst";
+                return app.drawCard()();
             }
         },
         {// 69
             action: function() {
                 setTimeout(() => {
-                    app.game.text = "Bestimme einen der 2 Trinken soll"
+                    app.game.text = "Bestimme einen der 2 trinken soll"
                     app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
                 }, 1000);
-                return "Bestimme einen der 69 Trinken soll";
+                return "Bestimme einen der 69 trinken soll";
             },
             customButtons: true
         },
         {// 70
             action: function() {
-                return "Verteil so viele Schlucke, wie du heute alkoholische Getränke hattest";
+                return app.drawCard()();
             }
         },
         {// 71
@@ -627,17 +661,17 @@ var game = {
         },
         {// 72
             action: function() {
-                return "Erzähle wo und wann du den Spieler zu deiner Linken getroffen hast";
+                return app.drawCard()();
             }
         },
         {// 73
             action: function() {
-                return "Der erste und letzte Spieler spielen \"Schere, Stein, Papier\" um 3 Schlucke";
+                return app.drawCard()();
             }
         },
         {// 74
             action: function() {
-                return "Das Mädchen (oder der Junge) mit der Größten Oberweite trinkt";
+                return app.drawCard()();
             }
         },
         {// 75
@@ -669,28 +703,42 @@ var game = {
         },
         {// 76
             action: function() {
-                return "Alle, die nach Beginn des Spiels dazugestoßen sind, trinekn 3";
+                return app.drawCard()();
             }
         },
         {// 77
             action: function() {
-                return "Trinke, wenn du du das vorliest";
+                return app.drawCard()();
             }
         },
         {// 78
             action: function() {
-                return "Denke an eine Zahl zwischen 1 und 10. Im Uhrzeigersinn versucht jeder die Zahl zu erraten. Der erste, der richtig liegt, wählt jemanden, der trinken muss.";
+                return app.drawCard()();
             }
         },
         {// 79
             action: function() {
-                return "Spielt einmal \"Ich hab noch nie\"";
+                return app.drawCard()();
             }
         },
         {// 80
             action: function() {
-                return "Wenn du gerade etwas auf dem Kopf trägst, trinke!";
-            }
+                var random = Math.floor(Math.random()*(app.players.length-1))
+                var player1 = random+1;
+                var player2 = (random+1)%(app.players.length-1)+1;
+                app.game.buttons =  [{action: ()=>{
+                        app.players[player1].changeLuck(-0.1);
+                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        app.game.text = app.players[player1].name+" hat jetzt weniger Glück";
+                    }, text: app.players[player1].name},
+                    {action: ()=>{
+                        app.players[player2].changeLuck(-0.1);
+                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        app.game.text = app.players[player2].name+" hat jetzt weniger Glück";
+                    },text: app.players[player2].name}];
+                return "Wähle wer ab jetzt weniger Glück beim Würfeln hat";
+            },
+            customButtons: true
         },
         {// 81
             action: function() {
@@ -705,27 +753,27 @@ var game = {
         },
         {// 82
             action: function() {
-                return "Alle Raucher trinken 2";
+                return app.drawCard()();
             }
         },
         {// 83
             action: function() {
-                return "Glückwunsch, du darfst trinken!";
+                return app.drawCard()();
             }
         },
         {// 84
             action: function() {
-                return "Die letzte Person die Aufsteht, muss 3 Schlucke trinken";
+                return app.drawCard()();
             }
         },
         {// 85
             action: function() {
-                return "Du trinkst einmal, dein linker Nachbar 2x, dessen Nachbar 3x, usw. Einmal im Kreis";
+                return app.drawCard()();
             }
         },
         {// 86
             action: function() {
-                return "Die Person mit dem härtesten Alkohol im Glas verteilt an so viele Spieler wie sie will einen Schluck";
+                return app.drawCard()();
             }
         },
         {// 87
@@ -743,17 +791,17 @@ var game = {
         },
         {// 88
             action: function() {
-                return "Mach ein Selfie mit der Person zu deiner Rechten";
+                return app.drawCard()();
             }
         },
         {// 89
             action: function() {
-                return "Die Person, die dir als nächstes in die Augen sieht, trinkt";
+                return app.drawCard()();
             }
         },
         {// 90
             action: function() {
-                return "Verteile 5 Schlucke, wenn du noch nie geraucht hast";
+                return app.drawCard()();
             }
         },
         {// 91
@@ -780,17 +828,17 @@ var game = {
         },
         {// 93
             action: function() {
-                return "Stell dich auf ein Bein und trinke";
+                return app.drawCard()();
             }
         },
         {// 94
             action: function() {
-                return "Wenn du jetzt dein Glas leerst, darfst du 5 verteilen";
+                return app.drawCard()();
             }
         },
         {// 95
             action: function() {
-                return "Die Person, die zuerst ein Kleidungsstück ausgezogen hat, verteilt 5 Schlucke (Socken etc. zählen nicht)";
+                return app.drawCard()();
             }
         },
         {// 96
@@ -828,7 +876,7 @@ var game = {
                     app.game.text += "\nTrinken reicht, du hast es fast ;)"
                     app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
                 }, 2500);
-                return "Trink und gehe auf START zurück";
+                return "Trinke und gehe auf START zurück";
             },
             customButtons: true
         },
@@ -846,5 +894,6 @@ var game = {
             customButtons: true,
             color: "#b68f0e"
         },
-    ]
+    ],
+    stacks: stacks
 }

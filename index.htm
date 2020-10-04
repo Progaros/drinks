@@ -80,6 +80,13 @@
                     <img @click="resetPlayers()" src="img/reset.svg" alt="⟲" class="resetButton">
                 </div>
             </div>
+            <div id="cardStack">
+                <div id="cardStackTitle">{{ text.cardStack }}</div>
+                <div v-for="stack in stacks" @click="currentCards = []">
+                    <input class="cardStackInput" type="radio" v-model="currentStack" :value="stack.name" :name="stack.name" :id="'radio-' + stack.name">
+                    <label class="cardStackLabel" :for="'radio-' + stack.name">{{ stack.displayName() }}</label>
+                </div>
+            </div>
             <div id="manual" v-html="text.manual"></div>
             <footer>
                 <div>© Oliver Großkloß</div>
@@ -167,8 +174,15 @@
 
     </div>
 
-    <script src="js/vueMin.js"></script>
-    <!-- <script src="js/vue.js"></script> -->
+    <script>
+        //debugging on localhost?
+        var debugging = false;
+        if (location.hostname === "localhost")
+            debugging = true;
+    </script>
+    <!-- <script src="js/vueMin.js"></script> -->
+    <script src="js/vue.js"></script>
+    <script src="js/stacks.js"></script>
     <script src="js/game.js"></script>
     <script src="js/components/addPlayersListItem.js"></script>
     <script src="js/components/gamefield.js"></script>

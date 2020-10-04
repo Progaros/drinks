@@ -11,5 +11,8 @@ var data = {
         text: ""
     },
     slideUpInfos: [],
-    overlayWarnings: []
+    overlayWarnings: [],
+    currentStack: "default",
+    currentCards: [],
+    stacks: game.stacks
 }

@@ -64,6 +64,18 @@
         margin: 0.3em 0;
         float: right;
     }
+    #cardStack {
+        width: 60%;
+        margin: 1vh auto 5vh auto;
+    }
+    #cardStackTitle {
+        font-size: 5vw;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    .cardStackLabel {
+        font-size: 4.5vw;
+    }
     #manual{
         width: 60%;
         margin: 1vh auto 3em auto;

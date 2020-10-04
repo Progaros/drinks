@@ -1,14 +1,15 @@
 var text = {
     //loadingGameData: "Lade Spieldaten..." in HTML because needed before VUE loads
-    //meta name discription: also HTML
-    //game fields. All correspinding Text is in js/game.js
+    //meta name description: also HTML
+    //game fields - All corresponding Text is in js/game.js
+    //stacks - All corresponding Text is in js/stacks.js
     title: "Drinks!", //also in HTML but will be overwritten with this
     browserTitle: "Drinks! - das Trinkspiel im Browser",
     player: "Spieler",
     manual: "<b>Testversion:</b> Verbesserungsvorschläge bitte an <a href='mailto:oliver.grosskloss+trinken@gmail.com' style='color: #4e88df; text-decoration: underline;'>diese</a> Adresse\n"+
             "\n"+
             "Drehe das Handy ins Querformat, um das Spiel zu starten.\n"+
-            "Drehe es zurück, um Spieler zu bearbeiten oder hinzuzufügen.\n"+
+            "Drehe es zurück, um Spieler zu bearbeiten oder hinzuzufügen oder die Kartenstapel anzupassen.\n"+
             "\n"+
             "Dein Spielstand wird regelmäßig gespeichert",
     startGame: "Alkohol ist schädlich. "+
@@ -26,5 +27,11 @@ var text = {
     pleaseAddPlayers: "Bitte mindestens\n2 Spieler hinzufügen.\nDrehe dafür dein Handy hochkant",
     restoreProgress: "Speicherstand gefunden. Möchtest du das alte Spiel laden?",
     update: "Update gefunden. Jetzt laden?",
-    slideUpInfo: ""
+    slideUpInfo: "",
+    stacks: {
+        default: "Standard",
+        crazy: "Verrückt",
+        hot: "Heiß"
+    },
+    cardStack: "Kartenstapel:"
 }
