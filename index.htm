@@ -81,13 +81,17 @@
                 </div>
             </div>
             <div id="cardStack">
-                <div id="cardStackTitle">{{ text.cardStack }}</div>
+                <div id="cardStackTitle">{{ text.cardStack }}:</div>
                 <div v-for="stack in stacks" @click="currentCards = []">
                     <input class="cardStackInput" type="radio" v-model="currentStack" :value="stack.name" :name="stack.name" :id="'radio-' + stack.name">
                     <label class="cardStackLabel" :for="'radio-' + stack.name">{{ stack.displayName() }}</label>
                 </div>
             </div>
-            <div id="manual" v-html="text.manual"></div>
+            <div id="manual">
+                <div v-html="text.manual"></div>
+                <div><br><b>Testversion:</b><br>Verbesserungsvorschläge bitte an <a href='mailto:oliver.grosskloss+trinken@gmail.com' style='color: #4e88df; text-decoration: underline;'>diese</a> Adresse</div>
+                <div v-if="debugging" style="color:red"><br><i>debug mode</i></div>
+            </div>
             <footer>
                 <div>© Oliver Großkloß</div>
                 <a class="text-muted" href="/privacyPolicy.html">Datenschutzerklärung</a> |
@@ -181,8 +185,8 @@
             || location.hostname.indexOf(1) > -1)
             debugging = true;
     </script>
-    <!-- <script src="js/vueMin.js"></script> -->
-    <script src="js/vue.js"></script>
+    <script src="js/vueMin.js"></script>
+    <!-- <script src="js/vue.js"></script> -->
     <script src="js/stacks.js"></script>
     <script src="js/game.js"></script>
     <script src="js/components/addPlayersListItem.js"></script>

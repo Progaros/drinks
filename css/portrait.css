@@ -13,7 +13,7 @@
     }
     #addPlayersListOuter {
         width: 50%;
-        min-height: 40vh;
+        min-height: 35vh;
         max-height: 50vh;
         margin: 0 25%;
         display: flex;
@@ -31,14 +31,14 @@
         display: none;
     }
     .addPlayersListItem{
-        width: calc(100% - 4px);
+        width: calc(100% - 4px - 1.7em);
         height: 2em;
         background-color: transparent;
         border: none;
         border-bottom: 1px solid #666;
         outline: none;
         margin: 0.3em -25px 0.3em 0;
-        padding: 1px 2px;
+        padding: 1px calc(2px + 1.7em) 1px 2px;
         color: #ccc;
         caret-color: white;
     }

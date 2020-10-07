@@ -6,9 +6,7 @@ var text = {
     title: "Drinks!", //also in HTML but will be overwritten with this
     browserTitle: "Drinks! - das Trinkspiel im Browser",
     player: "Spieler",
-    manual: "<b>Testversion:</b> Verbesserungsvorschläge bitte an <a href='mailto:oliver.grosskloss+trinken@gmail.com' style='color: #4e88df; text-decoration: underline;'>diese</a> Adresse\n"+
-            "\n"+
-            "Drehe das Handy ins Querformat, um das Spiel zu starten.\n"+
+    manual: "Drehe das Handy ins Querformat, um das Spiel zu starten.\n"+
             "Drehe es zurück, um Spieler zu bearbeiten oder hinzuzufügen oder die Kartenstapel anzupassen.\n"+
             "\n"+
             "Dein Spielstand wird regelmäßig gespeichert",
@@ -33,5 +31,5 @@ var text = {
         crazy: "Verrückt",
         hot: "Heiß"
     },
-    cardStack: "Kartenstapel:"
+    cardStack: "Modus"
 }

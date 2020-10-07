@@ -1,4 +1,7 @@
 var computed = {
+    debugging: function() {
+        return debugging;
+    },
     players: function() {
         var players = this.playerList.filter(p => p.name!=undefined && p.name!="");
         players.forEach(p => {
