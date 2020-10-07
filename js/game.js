@@ -547,7 +547,7 @@ var game = {
         {// 57
             action: function() {
                 app.game.buttons = [{action: async ()=>{
-                        app.game.text = "Du darfst " + await game.rollDiceAnimation(app.players[0].luck) + "verteilen";
+                        app.game.text = "Du darfst " + await game.rollDiceAnimation(app.players[0].luck) + " verteilen";
                         app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
                     },text: app.text.rollDice}];
                 return "Würfel nochmal. Verteile die Augenzahl in Schlucken";
@@ -926,9 +926,9 @@ var game = {
                 app.resetSave();
                 app.game.buttons = [{action: app.resetGame, text: "Nochmal"}];
                 return  "Herzlichen Glückwunsch "+app.players[0].name+",\n"+
-                        "du hast tatsächlich gewonnen!🎉"+
-                        "Wenn es dir gefallen hat,"+
-                        "<a href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=F6WZ5B8PS5YU4' style='color: #4691ee; text-decoration: underline;'>spendiere mir doch auch ein Bier</a>🍺";
+                        "du hast tatsächlich gewonnen!🎉 "+
+                        "Wenn es dir gefallen hat, "+
+                        "<a href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=F6WZ5B8PS5YU4' style='color: #4691ee; text-decoration: underline;'>spendier mir doch auch ein Bier</a>🍺";
             },
             customButtons: true,
             color: "#b68f0e"

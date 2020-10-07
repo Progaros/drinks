@@ -177,7 +177,8 @@
     <script>
         //debugging on localhost?
         var debugging = false;
-        if (location.hostname === "localhost")
+        if (location.hostname === "localhost"
+            || location.hostname.indexOf(1) > -1)
             debugging = true;
     </script>
     <!-- <script src="js/vueMin.js"></script> -->
