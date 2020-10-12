@@ -53,9 +53,6 @@ var methods = {
     },
     resetGame: function(){
         confetti.stop();
-        app.players.push(
-            app.players.splice(0,1)[0] //next player
-        );
         app.players.forEach(p => {p.position=0; p.luck=1});
         app.game.buttons = [{action: game.rollDice, text: app.text.rollDice}];
         app.game.text = "Drücke auf Würfeln";

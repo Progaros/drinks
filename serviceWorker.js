@@ -1,6 +1,6 @@
 "use strict";
 const swListener = new BroadcastChannel("swListener");
-const cacheName = "cache-v2.2.0";
+const cacheName = "cache-v2.3.0";
 var oldCache = false;
 const precacheResources = [
     "./",
@@ -29,6 +29,7 @@ const precacheResources = [
     "js/vue/data.js",
     "js/vue/methods.js",
     "js/vue/text.js",
+    "js/vue/watch.js",
     "js/confetti.min.js",
     "js/game.js",
     "js/script.js",

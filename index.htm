@@ -182,8 +182,10 @@
         //debugging on localhost?
         var debugging = false;
         if (location.hostname === "localhost"
-            || location.hostname.indexOf(1) > -1)
-            debugging = true;
+            || location.hostname.indexOf(1) > -1){
+                debugging = true;        
+                console.log("%cDebug Mode", "background:#a22 ; padding: 2px 7px; border-radius: 3px;  color: #fff");
+            }
     </script>
     <script src="js/vueMin.js"></script>
     <!-- <script src="js/vue.js"></script> -->
@@ -195,6 +197,7 @@
     <script src="js/vue/data.js"></script>
     <script src="js/vue/methods.js"></script>
     <script src="js/vue/computed.js"></script>
+    <script src="js/vue/watch.js"></script>
     <script src="js/vue/app.js"></script>
     <script src="js/script.js"></script>
     <script src="js/confetti.min.js"></script>

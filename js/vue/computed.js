@@ -22,6 +22,12 @@ var computed = {
         }
         return players;
     },
+    gameText(){
+        return this.game.text;
+    }, 
+    gameButtons(){
+        return this.game.buttons;
+    }, 
     fields: function() {
         return game.fields;
     }

@@ -1,11 +1,11 @@
 var game = {
     rollDice: async function() {
         document.getElementById("dice").style.display = "inline";
-        app.game.buttons = [{action: ()=>{}, text: app.text.rollDice}];// block the button while rolling
-        var position = app.players[0].position += await game.rollDiceAnimation(app.players[0].luck);
-        if (position > (game.fields.length-1))
-            position = app.players[0].position = game.fields.length-1;
-        document.getElementById("gameField"+position).scrollIntoView({
+        app.game.buttons[0].action = ()=>{}; //block the button while rolling
+        var position = app.players[0].position += await game.rollDiceAnimation(app.players[0].luck); //roll dice
+        if (position > (game.fields.length-1)) //if further than finish
+            position = app.players[0].position = game.fields.length-1; //go back
+        document.getElementById("gameField"+position).scrollIntoView({ //scroll to player
                     behavior: 'smooth',
                     block: 'center',
                     inline: 'center'
@@ -32,30 +32,35 @@ var game = {
         document.getElementById("dice").src = dice[number]; //set dice face
 
         time ++;
-        if(time>10) // break condition
-            return new Promise((resolve) => {
+        if(time<=10) // break condition
+            return new Promise((resolve) => { // roll again slower
+                var timeout = Math.pow(time,1.5)*7;
+                if (debugging)
+                    timeout = 0;
                 setTimeout(() => {
-                    resolve(number);
-                }, 200);
+                    resolve(game.rollDiceAnimation(luck, time, number));
+                }, timeout);
             });
-        return new Promise((resolve) => { // roll again slower
-            var timeout = Math.pow(time,1.5)*7;
-            if (debugging)
-                timeout = 0;
+        return new Promise((resolve) => { //stop here
             setTimeout(() => {
-                resolve(game.rollDiceAnimation(luck, time, number));
-            }, timeout);
-          });
+                resolve(number);
+            }, 200);
+        });
     },
     nextPlayer: function() {
         document.getElementById("dice").style.display = "none";
         app.players.push(
             app.players.splice(0,1)[0] //next player
         );
+        if (debugging){
+            console.log("");
+            console.log("%cPlayer: %c" + app.players[0].name, "color: lightgreen", "");
+            console.log();
+        }
         app.scrollToPlayer();
         app.saveGame();
-        app.game.buttons = [{action: game.rollDice, text: app.text.rollDice}];
         app.game.text = app.text.pressRollDice;
+        app.game.buttons = [{action: game.rollDice, text: app.text.rollDice}];
     },
     penaltyLog: {},
     checkPenaltyLog: function(field){
