@@ -1,5 +1,5 @@
 var watch;
-if (debugging) {
+//if (debugging) {
     watch = {
         gameText: function(newVal) {
             console.log("%cText: %c" + newVal + " (Feld " + app.players[0].position + ")", "color: yellow", "");
@@ -14,4 +14,4 @@ if (debugging) {
             console.log("%cButtons: " + buttons, "color: yellow", "padding: 2px 3px; border: 2px solid #666; border-radius: 5px;");
         }
     }
-}
+//}

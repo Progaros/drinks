@@ -1,7 +1,7 @@
 var game = {
     rollDice: async function() {
+        game.disableButtons(); //block the button while rolling
         document.getElementById("dice").style.display = "inline";
-        app.game.buttons[0].action = ()=>{}; //block the button while rolling
         var position = app.players[0].position += await game.rollDiceAnimation(app.players[0].luck); //roll dice
         if (position > (game.fields.length-1)) //if further than finish
             position = app.players[0].position = game.fields.length-1; //go back
@@ -11,8 +11,14 @@ var game = {
                     inline: 'center'
                 });
         app.game.text = game.fields[position].action();
-        if (game.fields[position].customButtons !== true)
-            app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+    },
+    disableButtons: function(){ //block the buttons
+        app.game.buttons.forEach(button => {
+            button.action = ()=>{};
+        });
+    },
+    nextPlayerButtons: function(){
+        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
     },
     rollDiceAnimation: async function(luck, time, number){
         //setup
@@ -52,11 +58,11 @@ var game = {
         app.players.push(
             app.players.splice(0,1)[0] //next player
         );
-        if (debugging){
+        //if (debugging){
             console.log("");
             console.log("%cPlayer: %c" + app.players[0].name, "color: lightgreen", "");
             console.log();
-        }
+        //}
         app.scrollToPlayer();
         app.saveGame();
         app.game.text = app.text.pressRollDice;
@@ -76,11 +82,11 @@ var game = {
             action: function() {
                 app.game.buttons = [{action: game.rollDice, text: app.text.rollDice}];
                 return "Du darfst nochmal würfeln";
-            },
-            customButtons: true
+            }
         },
         {// 2
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
@@ -90,22 +96,22 @@ var game = {
                     setTimeout(() => {
                         app.players[0].position += 2;
                         app.scrollToPlayer();
-                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        game.nextPlayerButtons();
                     }, 1000);
                     return "Gehe 2 Felder vor";
                 } else {
                     setTimeout(() => {
                         app.players[0].position -= 2;
                         app.scrollToPlayer();
-                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        game.nextPlayerButtons();
                     }, 1000);
                     return "Gehe 2 Felder zurück";
                 }
-            },
-            customButtons: true
+            }
         },
         {// 4
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
@@ -115,42 +121,42 @@ var game = {
                     setTimeout(() => {
                         app.players[0].position = 21;
                         app.scrollToPlayer();
-                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        game.nextPlayerButtons();
                     }, 1000);
                     return "Du gehst auf Feld 21";
                 } else {
                     setTimeout(() => {
                         app.players[0].position = 12;
                         app.scrollToPlayer();
-                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        game.nextPlayerButtons();
                     }, 1000);
                     return "Du gehst auf Feld 12";
                 }
-            },
-            customButtons: true
+            }
         },
         {// 6
             action: function() {
                 app.game.buttons =  [{action: ()=>{
                         app.players[0].changeLuck(0.3);
-                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        game.nextPlayerButtons();
                         app.game.text = "Gute Entscheidung ;)";
                     }, text: "Klingt gut"},
                     {action: ()=>{
-                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        game.nextPlayerButtons();
                         app.game.text = "Dann eben nicht";
                     },text: "Brauche ich nicht"}];
                 return "Angebot: Trinke jetzt 5 und du hast für das gesamte Spiel mehr Glück beim Würfeln";
-            },
-            customButtons: true
+            }
         },
         {// 7
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {//8
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
@@ -160,63 +166,67 @@ var game = {
                     {action: ()=>{
                         app.players[0].position += 10;
                         app.scrollToPlayer();
-                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        game.nextPlayerButtons();
                         app.game.text = "Deine Entscheidung...";
                     },text: "10 Felder"},
                     {action: ()=>{
                         app.players[0].changeLuck(0.3);
-                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        game.nextPlayerButtons();
                         app.game.text = "Deine Entscheidung...";
                     }, text: "Glück"}
                 ];
                 return "Wähle: Gehe jetzt 10 Felder vor oder du hast für das gesamte Spiel mehr Glück beim Würfeln";
-            },
-            customButtons: true
+            }
         },
         {// 10
             action: function() {
                 app.players[0].changeLuck(0.2);
+                game.nextPlayerButtons();
                 return "Du hast jetzt etwas mehr Glück beim Würfeln";
             }
         },
         {// 11
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 12
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 13
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 14
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 15
             action: function() {
                 app.game.buttons =  [{action: ()=>{
-                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        game.nextPlayerButtons();
                         app.game.text = "Du trinst 3";
                     }, text: "Ich hab durst"},
                     {action: ()=>{
                         app.players[0].position -= 3;
                         app.scrollToPlayer();
-                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        game.nextPlayerButtons();
                         app.game.text = "Du gehst 3 Felder zurück";
                     },text: "Ich will zurück"}];
                 return "Trink 3 oder gehe 3 Felder zurück";
-            },
-            customButtons: true
+            }
         },
         {// 16
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
@@ -224,23 +234,25 @@ var game = {
             action: function() {
                 app.game.buttons = [{action: game.rollDice, text: app.text.rollDice}];
                 return "Du darfst nochmal würfeln";
-            },
-            customButtons: true
+            }
         },
         {// 18
             action: function() {
                 if (game.checkPenaltyLog(18)){
                     app.game.buttons = [{action: async ()=>{
+                        game.disableButtons();
+                        console.log(18);
                         app.game.text = "Trinke " + await game.rollDiceAnimation(app.players[0].luck);
                         app.players[0].position = 0;
+                        game.nextPlayerButtons();
                         app.scrollToPlayer();
-                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
                     },text: app.text.rollDice}];
                     return "Würfel nochmal. Trink so viel wie du Augen gewürfelt hast und gehe auf START";
-                } else
-                return "Diesmal musst du nicht zurück";
-            },
-            customButtons: true
+                } else {
+                    game.nextPlayerButtons();
+                    return "Diesmal musst du nicht zurück";
+                }
+            }
         },
         {// 19
             action: function() {
@@ -249,27 +261,32 @@ var game = {
                 app.players.forEach(p => {if(p.position > bestScore) bestScore=p.position});
                 app.players.forEach(p => {if(p.position == bestScore) bestPlayer+=p.name+", "});
                 bestPlayer = bestPlayer.substring(0, bestPlayer.length-2);
+                game.nextPlayerButtons();
                 return "Es trinkt die Person, die dem Ziel am nächsten ist ("+bestPlayer+")";
             }
         },
         {// 20
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 21
             action: function() {
                 app.players[0].changeLuck(0.2);
+                game.nextPlayerButtons();
                 return "Du hast jetzt etwas mehr Glück beim Würfeln";
             }
         },
         {// 22
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 23
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
@@ -280,20 +297,20 @@ var game = {
                 var player2 = (random+1)%(app.players.length-1)+1;
                 app.game.buttons =  [{action: ()=>{
                         app.players[player1].changeLuck(0.2);
-                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        game.nextPlayerButtons();
                         app.game.text = app.players[player1].name+" hat jetzt mehr Glück";
                     }, text: app.players[player1].name},
                     {action: ()=>{
                         app.players[player2].changeLuck(0.2);
-                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        game.nextPlayerButtons();
                         app.game.text = app.players[player2].name+" hat jetzt mehr Glück";
                     },text: app.players[player2].name}];
                 return "Wähle wer ab jetzt mehr Glück beim Würfeln hat";
-            },
-            customButtons: true
+            }
         },
         {// 25
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
@@ -301,8 +318,7 @@ var game = {
             action: function() {
                 app.game.buttons = [{action: game.rollDice, text: app.text.rollDice}];
                 return "Du darfst nochmal würfeln und dabei einmal trinken";
-            },
-            customButtons: true
+            }
         },
         {// 27
             action: function() {
@@ -310,85 +326,92 @@ var game = {
                     setTimeout(() => {
                         app.players[0].position -= 10;
                         app.scrollToPlayer();
-                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        game.nextPlayerButtons();
                     }, 1500);
                     return "Gehe 10 Felder zurück";
-                } else
-                return "Diesmal musst du nicht zurück";
-            },
-            customButtons: true
+                } else {
+                    game.nextPlayerButtons();
+                    return "Diesmal musst du nicht zurück";
+                }
+            }
         },
         {// 28
             action: function() {
                 app.game.buttons = [{action: async ()=>{
+                        game.disableButtons();
                         app.game.text = "Trinke " + (Math.ceil(await game.rollDiceAnimation(app.players[0].luck)/2));
-                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        game.nextPlayerButtons();
                     },text: app.text.rollDice}];
                 return "Würfel nochmal. Trinke die halbe Augenzahl";
-            },
-            customButtons: true
+            }
         },
         {// 29
             action: function() {
                 app.game.buttons = [{action: async ()=>{
+                        game.disableButtons();
                         var result = (await game.rollDiceAnimation(app.players[0].luck))*2;
                         app.players[0].position += result;
                         app.game.text = "Du gehst "+result+" Felder nach vorne"
                         app.scrollToPlayer();
-                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        game.nextPlayerButtons();
                     },text: app.text.rollDice}];
                 return "Würfel. Du gehst die doppelte Augenzahl nach vorne";
-            },
-            customButtons: true
+            }
         },
         {// 30
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 31
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 32
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 33
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 34
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 35
             action: function() {
                 app.game.buttons =  [{action: ()=>{
-                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        game.nextPlayerButtons();
                         app.game.text = "Du trinkst 3";
                     }, text: "Ich hab durst"},
                     {action: ()=>{
                         app.players[0].position -= 6;
                         app.scrollToPlayer();
-                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        game.nextPlayerButtons();
                         app.game.text = "Du gehst 6 Felder zurück";
                     },text: "Ich will zurück"}];
                 return "Trink 3 oder gehe 6 Felder zurück";
-            },
-            customButtons: true
+            }
         },
         {// 36
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 37
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
@@ -397,40 +420,44 @@ var game = {
                 app.game.buttons =  [{action: ()=>{
                     app.players[0].position += 3;
                     app.scrollToPlayer();
-                    app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                    game.nextPlayerButtons();
                     app.game.text = "Du gehst 3 Felder vor";
                 }, text: "VORWÄRTS!"},
                 {action: ()=>{
-                    app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                    game.nextPlayerButtons();
                     app.game.text = "Du darfst das nächste Mal Trinken überspringen";
                 },text: "Ich hab Zeit..."}];
             return "Gehe jetzt 3 Felder vor oder überspringe das nächste mal Trinken";
-            },
-            customButtons: true
+            }
         },
         {// 39
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 40
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 41
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 42
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 43
             action: function() {
                 app.game.buttons = [{action: async ()=>{
+                        game.disableButtons();
                         var result = (await game.rollDiceAnimation(app.players[0].luck));
                         if (result%2 == 0){
                             app.game.text = app.players[0].name+" trinkt"
@@ -438,34 +465,38 @@ var game = {
                         else {
                             app.game.text = "Die andern trinken";
                         }
-                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        game.nextPlayerButtons();
                     },text: app.text.rollDice}];
                 return "Würfel. Bei gerader Zahl trinkst du, bei ungerader der Rest";
-            },
-            customButtons: true
+            }
         },
         {// 44
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 45
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 46
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 47
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 48
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
@@ -475,13 +506,14 @@ var game = {
                     setTimeout(() => {
                         app.players[0].position = 36;
                         app.scrollToPlayer();
-                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        game.nextPlayerButtons();
                     }, 1000);
                     return "Du gehst auf Feld 36";
-                } else
-                return "Diesmal musst du nicht zurück";
-            },
-            customButtons: true
+                } else {
+                    game.nextPlayerButtons();
+                    return "Diesmal musst du nicht zurück";
+                }
+            }
         },
         {// 50
             action: function() {
@@ -493,18 +525,22 @@ var game = {
                 });
                 if(app.players[0].position == bestScore) {
                     app.players[0].changeLuck(-0.2);
+                    game.nextPlayerButtons();
                     return "Du bist zu Schnell: Ab sofort hast du weniger Glück beim Würfeln";
                 }
                 else if(app.players[0].position == worstScore) {
                     app.players[0].changeLuck(0.4);
+                    game.nextPlayerButtons();
                     return "Hier ist ein Boost: Ab sofort hast du mehr Glück beim Würfeln";
                 }
                 else {
                     if (Math.random()<0.5){
                         app.players[0].changeLuck(-0.1);
+                        game.nextPlayerButtons();
                         return "Du hast jetzt etwas mehr Glück beim Würfeln";
-                    } else{
+                    } else {
                         app.players[0].changeLuck(0.2);
+                        game.nextPlayerButtons();
                         return "Du hast jetzt etwas weniger Glück beim Würfeln";
                     }
                 }
@@ -512,55 +548,61 @@ var game = {
         },
         {// 51
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 52
             action: function() {
                 app.players[0].changeLuck(-0.1);
+                game.nextPlayerButtons();
                 return "Du hast jetzt etwas weniger Glück beim Würfeln";
             }
         },
         {// 53
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 54
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 55
             action: function() {
                 app.game.buttons = [{action: async ()=>{
+                        game.disableButtons();
                         var result = await game.rollDiceAnimation(app.players[0].luck);
                         app.players[0].position -= result;
                         app.game.text = "Du gehst "+result+" Felder zurück"
                         app.scrollToPlayer();
-                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        game.nextPlayerButtons();
                     },text: app.text.rollDice}];
                 return "Würfel. Du gehst die Anzahl der Augen zurück";
-            },
-            customButtons: true
+            }
         },
         {// 56
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 57
             action: function() {
                 app.game.buttons = [{action: async ()=>{
+                        game.disableButtons();
                         app.game.text = "Du darfst " + await game.rollDiceAnimation(app.players[0].luck) + " verteilen";
-                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        game.nextPlayerButtons();
                     },text: app.text.rollDice}];
                 return "Würfel nochmal. Verteile die Augenzahl in Schlucken";
-            },
-            customButtons: true
+            }
         },
         {// 58
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
@@ -569,90 +611,90 @@ var game = {
                 app.game.buttons =  [{action: ()=>{
                         app.players[0].position += 3;
                         app.scrollToPlayer();
-                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        game.nextPlayerButtons();
                         app.game.text = "Du gehst 3 Felder vor";
                     }, text: "VORWÄRTS!"},
                     {action: ()=>{
-                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        game.nextPlayerButtons();
                         app.game.text = "Du darfst das nächste Mal Trinken überspringen";
                     },text: "Ich hab Zeit..."}];
                 return "Gehe jetzt 3 Felder vor oder überspringe das nächste Mal Trinken";
-            },
-            customButtons: true
+            }
         },
         {// 60
             action: function() {
                 setTimeout(() => {
                     app.players[0].position += 5;
                     app.scrollToPlayer();
-                    app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                    game.nextPlayerButtons();
                 }, 1000);
                 return "Rücke 5 Felder vor";
-            },
-            customButtons: true
+            }
         },
         {// 61
             action: function() {
                 app.players[0].changeLuck(0.2);
+                game.nextPlayerButtons();
                 return "Du hast jetzt etwas mehr Glück beim Würfeln";
             }
         },
         {// 62
             action: function() {
                 app.players[0].changeLuck(-0.1);
+                game.nextPlayerButtons();
                 return "Du hast jetzt etwas weniger Glück beim Würfeln";
             }
         },
         {// 63
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 64
             action: function() {
                 app.game.buttons =  [{action: ()=>{
-                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        game.nextPlayerButtons();
                         app.game.text = "Du trinkst 2";
                     }, text: "Ich hab durst"},
                     {action: ()=>{
                         app.players[0].position -= 3;
                         app.scrollToPlayer();
-                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        game.nextPlayerButtons();
                         app.game.text = "Du gehst 3 Felder zurück";
                     },text: "Ich will zurück"}];
                 return "Trink 2 oder gehe 3 Felder zurück";
-            },
-            customButtons: true
+            }
         },
         {// 65
             action: function() {
                 setTimeout(() => {
                     app.players[0].position -= 6;
                     app.scrollToPlayer();
-                    app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                    game.nextPlayerButtons();
                 }, 1000);
                 return "Gehe 6 Felder zurück";
-            },
-            customButtons: true
+            }
         },
         {// 66
             action: function() {
                 setTimeout(() => {
                     app.players[0].position += 2;
                     app.scrollToPlayer();
-                    app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                    game.nextPlayerButtons();
                 }, 1000);
                 return "Gehe 2 Felder vor und trinke";
-            },
-            customButtons: true
+            }
         },
         {// 67
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 68
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
@@ -660,14 +702,14 @@ var game = {
             action: function() {
                 setTimeout(() => {
                     app.game.text = "Bestimme einen der 2 trinken soll"
-                    app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                    game.nextPlayerButtons();
                 }, 1000);
                 return "Bestimme einen der 69 trinken soll";
-            },
-            customButtons: true
+            }
         },
         {// 70
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
@@ -680,23 +722,27 @@ var game = {
                         app.game.buttons = [{action: game.rollDice, text: app.text.rollDice}];
                     }, 1000);
                     return "Gehe auf das Feld 50 und Würfel noch einmal";
-                } else
-                return "Diesmal musst du nicht zurück";
-            },
-            customButtons: true
+                } else {
+                    game.nextPlayerButtons();
+                    return "Diesmal musst du nicht zurück";
+                }
+            }
         },
         {// 72
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 73
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 74
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
@@ -710,18 +756,22 @@ var game = {
                 });
                 if(app.players[0].position == bestScore) {
                     app.players[0].changeLuck(-0.2);
+                    game.nextPlayerButtons();
                     return "Du bist zu Schnell: Ab sofort hast du weniger Glück beim Würfeln";
                 }
                 else if(app.players[0].position == worstScore) {
                     app.players[0].changeLuck(0.4);
+                    game.nextPlayerButtons();
                     return "Hier ist ein Boost: Ab sofort hast du mehr Glück beim Würfeln";
                 }
                 else {
                     if (Math.random()<0.5){
                         app.players[0].changeLuck(0.2);
+                        game.nextPlayerButtons();
                         return "Du hast jetzt etwas mehr Glück beim Würfeln";
-                    } else{
+                    } else {
                         app.players[0].changeLuck(-0.1);
+                        game.nextPlayerButtons();
                         return "Du hast jetzt etwas weniger Glück beim Würfeln";
                     }
                 }
@@ -729,21 +779,25 @@ var game = {
         },
         {// 76
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 77
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 78
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 79
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
@@ -754,17 +808,16 @@ var game = {
                 var player2 = (random+1)%(app.players.length-1)+1;
                 app.game.buttons =  [{action: ()=>{
                         app.players[player1].changeLuck(-0.1);
-                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        game.nextPlayerButtons();
                         app.game.text = app.players[player1].name+" hat jetzt weniger Glück";
                     }, text: app.players[player1].name},
                     {action: ()=>{
                         app.players[player2].changeLuck(-0.1);
-                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        game.nextPlayerButtons();
                         app.game.text = app.players[player2].name+" hat jetzt weniger Glück";
                     },text: app.players[player2].name}];
                 return "Wähle wer ab jetzt weniger Glück beim Würfeln hat";
-            },
-            customButtons: true
+            }
         },
         {// 81
             action: function() {
@@ -772,36 +825,42 @@ var game = {
                     setTimeout(() => {
                         app.players[0].position = 69;
                         app.scrollToPlayer();
-                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        game.nextPlayerButtons();
                     }, 1000);
                     return "Gehe auf Feld 69 zurück";
-                } else
-                return "Diesmal musst du nicht zurück";
-            },
-            customButtons: true
+                } else {
+                    game.nextPlayerButtons();
+                    return "Diesmal musst du nicht zurück";
+                }
+            }
         },
         {// 82
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 83
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 84
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 85
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 86
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
@@ -809,30 +868,35 @@ var game = {
             action: function() {
                 if (game.checkPenaltyLog(87)){
                     app.game.buttons = [{action: async ()=>{
+                            game.disableButtons();
                             var result = (await game.rollDiceAnimation(app.players[0].luck)*2);
                             app.players[0].position -= result;
                             app.game.text = "Du gehst "+result+" Felder zurück"
                             app.scrollToPlayer();
-                            app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                            game.nextPlayerButtons();
                         },text: app.text.rollDice}];
                     return "Würfel. Du gehst die doppelte Augenzahl nach hinten";
-                } else
-                return "Diesmal musst du nicht zurück";
-            },
-            customButtons: true
+                } else {
+                    game.nextPlayerButtons();
+                    return "Diesmal musst du nicht zurück";
+                }
+            }
         },
         {// 88
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 89
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 90
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
@@ -842,13 +906,14 @@ var game = {
                     setTimeout(() => {
                         app.players[0].position = 85;
                         app.scrollToPlayer();
-                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        game.nextPlayerButtons();
                     }, 1000);
                     return "Gehe auf Feld 85 zurück";
-                } else
-                return "Diesmal musst du nicht zurück";
-            },
-            customButtons: true
+                } else {
+                    game.nextPlayerButtons();
+                    return "Diesmal musst du nicht zurück";
+                }
+            }
         },
         {// 92
             action: function() {
@@ -856,26 +921,30 @@ var game = {
                     setTimeout(() => {
                         app.players[0].position = 80;
                         app.scrollToPlayer();
-                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        game.nextPlayerButtons();
                     }, 1000);
                     return "Gehe auf Feld 80 zurück";
-                } else
-                return "Diesmal musst du nicht zurück";
-            },
-            customButtons: true
+                } else {
+                    game.nextPlayerButtons();
+                    return "Diesmal musst du nicht zurück";
+                }
+            }
         },
         {// 93
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 94
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
         {// 95
             action: function() {
+                game.nextPlayerButtons();
                 return app.drawCard()();
             }
         },
@@ -885,16 +954,18 @@ var game = {
                     setTimeout(() => {
                         app.players[0].position = 69;
                         app.scrollToPlayer();
-                        app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                        game.nextPlayerButtons();
                     }, 1000);
                     return "Gehe auf Feld 69 zurück";
-                } else
-                return "Diesmal musst du nicht zurück";
-            },
-            customButtons: true
+                } else {
+                    game.nextPlayerButtons();
+                    return "Diesmal musst du nicht zurück";
+                }
+            }
         },
         {// 97
             action: function() {
+                game.nextPlayerButtons();
                 return "Nicht mehr weit! Konzentrier dich: alle außer dir trinken";
             }
         },
@@ -902,27 +973,28 @@ var game = {
             action: function() {
                 if (game.checkPenaltyLog(98)){
                     app.game.buttons = [{action: async ()=>{
+                            game.disableButtons();
                             var result = await game.rollDiceAnimation(app.players[0].luck);
                             app.players[0].position -= result;
                             app.game.text = "Du gehst "+result+" Felder zurück"
                             app.scrollToPlayer();
-                            app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                            game.nextPlayerButtons();
                         },text: app.text.rollDice}];
                     return "Würfel und gehe die Anzahl der Augen zurück";
-                } else
-                return "Diesmal musst du nicht zurück";
-            },
-            customButtons: true
+                } else {
+                    game.nextPlayerButtons();
+                    return "Diesmal musst du nicht zurück";
+                }
+            }
         },
         {// 99
             action: function() {
                 setTimeout(() => {
                     app.game.text += "\nTrinken reicht, du hast es fast ;)"
-                    app.game.buttons = [{action: game.nextPlayer, text: app.text.nextPlayer}];
+                    game.nextPlayerButtons();
                 }, 2500);
                 return "Trinke und gehe auf START zurück";
-            },
-            customButtons: true
+            }
         },
         {// 100
             action: function() {
@@ -935,7 +1007,6 @@ var game = {
                         "Wenn es dir gefallen hat, "+
                         "<a href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=F6WZ5B8PS5YU4' style='color: #4691ee; text-decoration: underline;'>spendier mir doch auch ein Bier</a>🍺";
             },
-            customButtons: true,
             color: "#b68f0e"
         },
     ],

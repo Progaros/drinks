@@ -9,7 +9,9 @@ var text = {
     manual: "Drehe das Handy ins Querformat, um das Spiel zu starten.\n"+
             "Drehe es zurück, um Spieler zu bearbeiten oder hinzuzufügen oder die Kartenstapel anzupassen.\n"+
             "\n"+
-            "Dein Spielstand wird regelmäßig gespeichert",
+            "Dein Spielstand wird regelmäßig gespeichert.\n"+
+            "\n"+
+            "Dieses Trinkspiel funktioniert online und offline im Browser. Es ist komplett kostenlos und werbefrei! Wenn du mich unterstützen willst, kannst du das gerne <a href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=F6WZ5B8PS5YU4' style='color: #4691ee; text-decoration: underline;'>hier</a> tun.",
     startGame: "Alkohol ist schädlich. "+
                 "Mit dem Fortfahren bestätigt ihr für alle eventuellen Konsequenzen selbst verantwortlich zu sein.\n"+
                 "Spiel beginnen?",

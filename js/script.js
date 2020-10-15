@@ -6,7 +6,7 @@ class Player {
         this.luck = 1;
         if(name != undefined)
             this.name = name;
-        this.changeLuck =  function changeLuck(change) {
+        this.changeLuck = function(change) {
             this.luck += change;    
             if (this.luck < 0.5)
                 this.luck = 0.5;

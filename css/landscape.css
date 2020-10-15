@@ -119,6 +119,10 @@
         justify-content: center;
         align-items: center;
     }
+    .gameButton:active:hover{
+        background-color: #171717;
+        border-style: groove;
+    }
     .slideUpInfo{
         width: calc(40vh + 40vw);
         bottom: -2vw;
